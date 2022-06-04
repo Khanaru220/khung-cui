@@ -4,6 +4,7 @@ const ButtonsNavigateForm = ({ isLoginPage, isSignupPage, navigate }) => {
 			style={{
 				display: 'flex',
 				gap: '40px',
+				gridGap:'40px',
 				justifyContent: 'center',
 				alignItems: 'center',
 				fontWeight: 'bold',

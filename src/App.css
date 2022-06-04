@@ -64,6 +64,7 @@ body.background-dark {
 /* ----- RowFilms */
 .row-film_poster{
 		display: flex;
+		grid-gap:3rem;
 		gap: 3rem;
 		overflow-y: auto;
 		scrollbar-width:thin;
@@ -335,6 +336,7 @@ padding:0.5rem;
 		margin-bottom:5em;
 	}
 	.row-film_poster{
+		grid-gap:2rem;
 		gap:2rem;
 	}
 	.filmNameContainer{
