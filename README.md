@@ -1,6 +1,6 @@
 # Khung Cửi project
 
-live site: https://khung-cui.netlify.app
+✨Live site: https://khung-cui.netlify.app
 
 ### What does it mean?
 > In English, it's "loom" -- a piece of equipment for weaving (= making thread into cloth)
