@@ -1,6 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
 
+@supports not (aspect-ratio: 5 / 7) { 
+	/** Fallback (current, using intrinsic ratio technique) */
+  .filmCardContainer::before {
+    float: left; 
+    padding-top: 140%; 
+    content: '';
+  }
+  .filmCardContainer:after {
+    display: block;
+    content: '';
+    clear: both;
+  }
+}
+
+
 html{
 	font-size:62.5%;
 }
@@ -64,10 +79,13 @@ body.background-dark {
 /* ----- RowFilms */
 .row-film_poster{
 		display: flex;
-		grid-gap:3rem;
 		gap: 3rem;
 		overflow-y: auto;
 		scrollbar-width:thin;
+}
+
+.no-flexbox-gap .row-film_poster > *:not(:last-child){
+	margin-right:3rem;
 }
 
 .filmCardContainer {
@@ -75,7 +93,7 @@ body.background-dark {
 	/* // minWidth + flex-basic -- remain ratio in small screen, display Maximum: 8 films 1 row */
 
 	flex: 1 0 15%;
-	min-width: 10rem;
+	min-width: 12rem;
 	/* // when has few films not enought 'overflow', and they not too big */
 	max-width: 18%;
 	aspect-ratio: 5/7;
@@ -145,6 +163,21 @@ body.background-dark {
 	color:red;
 }
 
+/* ButtonsNavigateForm.js */
+
+.container-btn-navigate{
+		display: flex;
+		gap: 4rem;
+		justify-content: center;
+		align-items: center;
+		font-weight: bold;
+}
+
+.no-flexbox-gap .container-btn-navigate > *:not(:last-child){
+	margin-right:4rem;
+}
+
+
 /* FormFilter.js */
 .formFilter {
 	display: flex;
@@ -155,6 +188,12 @@ body.background-dark {
 	font-size:1.4rem;
 	margin-bottom:4rem;
 }
+
+.no-flexbox-gap .formFilter > *:not(:last-child){
+	margin-right:2rem;
+}
+
+
 
 .formFilter > *:not(:last-child) {
 	/* hack to add border */
@@ -268,9 +307,13 @@ display: flex;
 justify-content: flex-end;
 gap:1rem;
 margin-bottom:3rem;
-
-
 }
+
+.no-flexbox-gap .friend-add-field > *:not(:last-child){
+	margin-right:1rem;
+}
+
+
 
 
 .friend-add-field button:hover{
@@ -318,6 +361,7 @@ padding:0.5rem;
 
 /*  */
 
+
 @media (max-width: 768px){
 	html{
 		font-size:50%;
@@ -335,13 +379,18 @@ padding:0.5rem;
 	.row-film{
 		margin-bottom:5em;
 	}
+
 	.row-film_poster{
-		grid-gap:2rem;
 		gap:2rem;
+	}
+	.no-flexbox-gap .row-film_poster > *:not(:last-child){
+		margin-right:2rem;
 	}
 	.filmNameContainer{
 		font-size:90%
 	}
+
+	
 	}
 
 

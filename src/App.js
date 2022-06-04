@@ -15,6 +15,7 @@ import FormAccount from './components/AccountPage/FormAccount';
 import Initial_5Acc from './components/initial/Initial_5Acc';
 import generateAcc from './components/functions/generateAcc';
 import fetchAPIFilms from './components/functions/fetchAPIFilms';
+import checkFlexGap from './components/functions/checkFlexGap';
 import PageDisplayFilms from './components/DisplayPage/PageDisplayFilms';
 import FriendAddField from './components/DisplayPage/FriendAddField'
 
@@ -61,6 +62,10 @@ function App() {
 			alert('🔴 Wrong PASSWORD. Please try again.');
 		}
 	};
+
+	React.useEffect(() => { 
+		checkFlexGap()
+		 });
 
 	// (?) I need add a 'wait point' here, just pass data 'arrFilms' after it is updated
 	// @@ urgly solution, wait 'fecthing data' === separate 2 cases of (Promise/object films)

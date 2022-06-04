@@ -9,6 +9,10 @@
 	gap: 5px;
 }
 
+.no-flexbox-gap .input-line > *:not(:last-child){
+	margin-right:5px;
+}
+
 .form-account {
 	display: flex;
 	flex-direction: column;
@@ -19,20 +23,35 @@
 	padding-top: 30px;
 }
 
-.form-account input,
-.form-account select,
-.form-account .btnSubmit {
-	padding: 12px 10px;
-	font-size: inherit;
+.no-flexbox-gap .form-account > *:not(:last-child){
+	margin-right:20px;
 }
+
+
+
 
 .form-account input {
 	width: 240px;
+	max-width:60vw;
+}
+.form-account select{
+	height:4.7rem;
+}
+
+.form-account input,
+.form-account .btnSubmit {
+	padding: 12px 10px;
 }
 
 .form-account .btnSubmit,
 .form-account select {
 	width: 90px;
+}
+
+.form-account input,
+.form-account .btnSubmit,
+.form-account select {
+	font-size: inherit;
 }
 
 .form-account .btnSubmit {

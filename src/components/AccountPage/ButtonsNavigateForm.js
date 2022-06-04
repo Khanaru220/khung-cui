@@ -1,14 +1,7 @@
 const ButtonsNavigateForm = ({ isLoginPage, isSignupPage, navigate }) => {
 	return (
 		<div
-			style={{
-				display: 'flex',
-				gap: '40px',
-				gridGap:'40px',
-				justifyContent: 'center',
-				alignItems: 'center',
-				fontWeight: 'bold',
-			}}
+		className="container-btn-navigate"
 		>
 			<div
 				onClick={() => {

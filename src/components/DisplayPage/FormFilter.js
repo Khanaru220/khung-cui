@@ -62,7 +62,7 @@ const FormFilter = ({ accounts,objFitlers, setFilter, accountLogin }) => {
 						<InputTextCheckboxField
 							key={i}
 							type="checkbox"
-							label={`🐱‍🏍 ${nameOfFriend}`}
+							label={`🧙‍♀️ ${nameOfFriend}`}
 							id={frUsername.toLowerCase()}
 							value={frUsername} // 'value' to build arrFilter --> (?) do i need 'value' --> i can make id === value
 						/>
