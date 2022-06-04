@@ -160,7 +160,7 @@ function App() {
 										/>
 									</div>
 										<div className="hero">
-												<img src={heroBackground} alt={`a cover image of series "Game of Thrones"`}/>
+												<img src={heroBackground} alt={`A man warrior from "Game of Thrones". He's sitting under the tree and inside of green forest. Looking nowhere.`}/>
 										</div>
 										
 									</>
