@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# Khung Cửi project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+live site: https://khung-cui.netlify.app
 
-## Available Scripts
+### What does it mean?
+> In English, it's "loom" -- a piece of equipment for weaving (= making thread into cloth)
+> <img src="https://user-images.githubusercontent.com/74447462/171987521-6addd52e-5fcf-4b12-8bd1-82d1fc7ee423.jpg" style="width:400px">
 
-In the project directory, you can run:
+### How do I link that name with the streaming service?
+> 1. The layout that films are displayed -- a grid, which is made by crossing columns and rows. Can relate that layout to the patterns often made from a loom.
+> 2. A film isn't a 120' video. It's built up from multiple things (storyline, content, actors, sound, plot twists,...). Those materials can't be mixed. They have to be connected, like the way a spider builds their web. One by one, step by step.
 
-### `npm start`
+  
+## CI/CD
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Source I learn the steps about CI/CD: 
+https://www.youtube.com/watch?v=TVb05-_vdSc
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### How it works:
+1. I need a GitHub repo first
+2. Then links Netlify to that Repo. Netlify uses a thing called WebHooks -- whenever something changes on my repo, WebHooks will send to a notification to Netlify so that Netlify can recognize and decide how to react to that change
+3. Initial setup:
+	1. (Netlify) set up folder deploy: `build`
+	2. (Netlify) command build: `npm run build`
+	3. Trigger: whenever I use `push`, Netlify will build and deploy the `build` folder
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Project journal:
+![backgroundwhite-1500px](https://user-images.githubusercontent.com/74447462/171987918-d8578640-f7c4-453d-9737-5abb22283352.png)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Known problems:
+- It needs a database to make redirect based on 'loggedin' status works
