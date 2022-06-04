@@ -1,4 +1,4 @@
-import InputText_CheckboxField from './../InputText_CheckboxField.js';
+import InputTextCheckboxField from '../InputTextCheckboxField.js';
 import toCapitalizeFirstLetter from './../functions/toCapitalizeFirstLetter';
 
 const filter_genres = ['Adventure', 'Romance', 'Nature', 'Crime'];
@@ -34,7 +34,7 @@ const FormFilter = ({ accounts,objFitlers, setFilter, accountLogin }) => {
 			{/* data-type is an anchor to select /*}
 			{/* --> read data-type_filter --> contains the name_property of state 'objFilters'  */}
 			<div data-type="filter" data-type_filter="since">
-				<InputText_CheckboxField
+				<InputTextCheckboxField
 					type="number"
 					label={`Since year:`}
 					id="since"
@@ -46,7 +46,7 @@ const FormFilter = ({ accounts,objFitlers, setFilter, accountLogin }) => {
 			</div>
 			<div data-type="filter" data-type_filter="genres">
 				{filter_genres.map((option, i) => (
-					<InputText_CheckboxField
+					<InputTextCheckboxField
 						key={i}
 						type="checkbox"
 						label={toCapitalizeFirstLetter(option)}
@@ -59,7 +59,7 @@ const FormFilter = ({ accounts,objFitlers, setFilter, accountLogin }) => {
 				{filter_friends.map((frUsername, i) => {
 					const nameOfFriend = accounts.find(acc=>acc.username===frUsername).name
 					return(
-						<InputText_CheckboxField
+						<InputTextCheckboxField
 							key={i}
 							type="checkbox"
 							label={`🐱‍🏍 ${nameOfFriend}`}

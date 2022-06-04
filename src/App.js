@@ -1,5 +1,4 @@
 import './App.css';
-import Form from './components/AccountPage/Form';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 
@@ -70,7 +69,7 @@ function App() {
 		return (
 			<BrowserRouter>
 					<div className={"nav-bar"}>
-						<img src={logo}/>
+						<img src={logo} alt="Logo of Khung cửi -- a cloth pattern"/>
 						<h1 onClick={()=> new Audio(mp3).play()}>Khung Cửi</h1>
 
 						{accountLogin?.username ? <p>Hi, <strong>{accountLogin.username}</strong></p> :''}
@@ -161,7 +160,7 @@ function App() {
 										/>
 									</div>
 										<div className="hero">
-												<img src={heroBackground}/>
+												<img src={heroBackground} alt={`a cover image of series "Game of Thrones"`}/>
 										</div>
 										
 									</>

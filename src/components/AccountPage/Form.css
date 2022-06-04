@@ -48,15 +48,24 @@
 	background-color: #999;
 }
 
-.form-account a:link,
+/* .form-account a:link,
 .form-account a:visited {
 	position: absolute;
 	bottom: -20px;
 	font-size: 80%;
 	text-decoration: none;
 	color: rgb(0, 128, 255);
+} */
+.form-account .placeholder-link{
+	display:inline-block;
+	position: absolute;
+	bottom: -2.5rem;
+	font-size: 70%;
+	text-decoration: none;
+	color: rgb(0, 128, 255);
+	cursor:pointer;
 }
-.form-account a:hover,
-.form-account a:active {
+
+.form-account .placeholder-link:hover{
 	text-decoration: underline;
 }

@@ -1,7 +1,7 @@
 import './Form.css';
 import { useState } from 'react';
 import InputSelectField from '../InputSelectField';
-import InputText_CheckboxField from '../InputText_CheckboxField';
+import InputTextCheckboxField from '../InputTextCheckboxField';
 import validateEmpty from '../validateEmpty';
 
 const initialState = () => {
@@ -28,7 +28,7 @@ const Form = ({ doSignup, doLogin, isLoginPage, isSignupPage }) => {
 	return (
 		<form onSubmit={(e) => e.preventDefault()} className="form-account">
 			<div className="input-line">
-				<InputText_CheckboxField
+				<InputTextCheckboxField
 					value={accInput.username}
 					handleChange={inputChange}
 					type="text"
@@ -59,7 +59,7 @@ const Form = ({ doSignup, doLogin, isLoginPage, isSignupPage }) => {
 			</div>
 
 			<div className="input-line">
-				<InputText_CheckboxField
+				<InputTextCheckboxField
 					value={accInput.password}
 					handleChange={inputChange}
 					type="password"
@@ -82,13 +82,13 @@ const Form = ({ doSignup, doLogin, isLoginPage, isSignupPage }) => {
 				</button>
 			</div>
 
-			{/* <InputText_CheckboxField
+			{/* <InputTextCheckboxField
 					type="checkbox"
 					value="remember-me"
 					id="remember"
 					label="Remember me"
 				/> */}
-			{isLoginPage ? <a href="#">Forgot password?</a> : ''}
+			{isLoginPage ? <p className="placeholder-link">Forgot password?</p> : ''}
 
 			{/* <button onClick={'_loginAccount'}>Log-in</button>
 				<button onClick={() => {}}>Log-out</button> */}

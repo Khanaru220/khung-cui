@@ -1,4 +1,4 @@
-import InputText_CheckboxField from './../InputText_CheckboxField'
+import InputTextCheckboxField from '../InputTextCheckboxField'
 import {useState} from 'react'
 
 
@@ -20,7 +20,7 @@ const FriendAddField =  ({accounts,accountLogin,setAccounts})=>{
 return (
 
   <div className="friend-add-field">
-    <InputText_CheckboxField type="text" id="friend-username" value={friendUserName} handleChange={(e)=>setFriendUserName(e.target.value)} placeholder="Friend's username"/>
+    <InputTextCheckboxField type="text" id="friend-username" value={friendUserName} handleChange={(e)=>setFriendUserName(e.target.value)} placeholder="Friend's username"/>
   <button onClick={(e)=>{
       //.getElementById('friend-username') --- .getElementById() only used in global 'document'
     addFriend(document.getElementById('friend-username').value)

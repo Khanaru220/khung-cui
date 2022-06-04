@@ -1,7 +1,7 @@
 import FormFilter from './FormFilter';
 import ControlGridLists from './../ControlGridLists';
 import React from 'react';
-import heroBackground from './../img/hero-background.jpg'
+// import heroBackground from './../img/hero-background.jpg'
 
 const PageDisplayFilms = ({ popFilms, accounts, accountLogin,setAccounts }) => {
 	// (need change) arrFitlers --> objFilters
