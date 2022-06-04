@@ -1,0 +1,62 @@
+.input-line label {
+	display: block;
+	color: #999;
+}
+
+.input-line {
+	display: flex;
+	align-items: flex-end;
+	gap: 5px;
+}
+
+.form-account {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	/* to make <a> Forgot display below */
+	padding-bottom: 20px;
+	position: relative;
+	padding-top: 30px;
+}
+
+.form-account input,
+.form-account select,
+.form-account .btnSubmit {
+	padding: 12px 10px;
+	font-size: inherit;
+}
+
+.form-account input {
+	width: 240px;
+}
+
+.form-account .btnSubmit,
+.form-account select {
+	width: 90px;
+}
+
+.form-account .btnSubmit {
+	border: none;
+	border-radius: 3px;
+	background-color: #000;
+	color: #fff;
+	cursor: pointer;
+	transition: 0.3s all;
+}
+
+.form-account .btnSubmit:hover {
+	background-color: #999;
+}
+
+.form-account a:link,
+.form-account a:visited {
+	position: absolute;
+	bottom: -20px;
+	font-size: 80%;
+	text-decoration: none;
+	color: rgb(0, 128, 255);
+}
+.form-account a:hover,
+.form-account a:active {
+	text-decoration: underline;
+}
