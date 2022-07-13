@@ -1,25 +1,35 @@
 import notFoundBackground from './img/not-found-poster.jpg';
 
-
-const RowFilms = ({isMyList=false, titleList, arrFilms, objFilters,setAccounts,accounts,accountLogin }) => {
+const RowFilms = ({
+	isMyList = false,
+	titleList,
+	arrFilms,
+	objFilters,
+	setAccounts,
+	accounts,
+	accountLogin,
+}) => {
 	// (!) hard to change property, element deeper level with this 'copy' technique
-	const copiedAccounts = [...accounts]
-	
-	const addFilm = (id)=>{
-		// (i suppose it will work base on 'somehow' the 'eventhandler' remember exactly 'arrFilms' when creat)
-	const filmSelected = arrFilms.find(film => film.id === Number(id))
-	// bad solution -- remove dubplicate friends username
-	copiedAccounts[copiedAccounts.indexOf(accountLogin)].likedFilms = [...new Set([filmSelected,...accountLogin.likedFilms])]
-	setAccounts(copiedAccounts)
-}
+	const copiedAccounts = [...accounts];
 
-const removeFilm = (id) =>{
-		const filmSelected = arrFilms.find(film => film.id === Number(id))
-		const copiedLikedFilms = accountLogin.likedFilms
-		copiedLikedFilms.splice(copiedLikedFilms.indexOf(filmSelected),1) //delete it in array
-		copiedAccounts[copiedAccounts.indexOf(accountLogin)].likedFilms = copiedLikedFilms
-		setAccounts(copiedAccounts)
-	}
+	const addFilm = (id) => {
+		// (i suppose it will work base on 'somehow' the 'eventhandler' remember exactly 'arrFilms' when creat)
+		const filmSelected = arrFilms.find((film) => film.id === Number(id));
+		// bad solution -- remove dubplicate friends username
+		copiedAccounts[copiedAccounts.indexOf(accountLogin)].likedFilms = [
+			...new Set([filmSelected, ...accountLogin.likedFilms]),
+		];
+		setAccounts(copiedAccounts);
+	};
+
+	const removeFilm = (id) => {
+		const filmSelected = arrFilms.find((film) => film.id === Number(id));
+		const copiedLikedFilms = accountLogin.likedFilms;
+		copiedLikedFilms.splice(copiedLikedFilms.indexOf(filmSelected), 1); //delete it in array
+		copiedAccounts[copiedAccounts.indexOf(accountLogin)].likedFilms =
+			copiedLikedFilms;
+		setAccounts(copiedAccounts);
+	};
 	// titleList: e.g My List, Popular
 	// size of card-film -- fixed width + height (rectangular)
 	// over-flow: auto -- work better than "scroll"
@@ -75,9 +85,9 @@ const removeFilm = (id) =>{
 			const nameFilm = filmsDisplay[i].name;
 			return (
 				// background-image: based on "posterImgURL" --> if (false) use default img from local
-				<div className="filmCardContainer" key={i} >
+				<div className="filmCardContainer" key={i}>
 					<div
-					data-id={filmsDisplay[i].id}
+						data-id={filmsDisplay[i].id}
 						className="filmCard"
 						style={{
 							backgroundImage: `url(${
@@ -85,15 +95,45 @@ const removeFilm = (id) =>{
 							})`,
 						}}
 					>
-						<div className="filmNameContainer">{nameFilm}
-						{isMyList 
-						? <svg className="remove-film h-6 w-6" onClick={(e)=>{removeFilm(e.target.closest('.filmCard').dataset.id)}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-						<path strokeLinecap="round" strokeLinejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-					</svg>
-					:<svg className="add-film h-6 w-6" onClick={(e)=>{addFilm(e.target.closest('.filmCard').dataset.id)}} xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-					<path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-				</svg>  }
-						
+						<div className="filmNameContainer">
+							{nameFilm}
+							{isMyList ? (
+								<svg
+									className="remove-film h-6 w-6"
+									onClick={(e) => {
+										removeFilm(e.target.closest('.filmCard').dataset.id);
+									}}
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+									strokeWidth="2"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+									/>
+								</svg>
+							) : (
+								<svg
+									className="add-film h-6 w-6"
+									onClick={(e) => {
+										addFilm(e.target.closest('.filmCard').dataset.id);
+									}}
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+									strokeWidth="2"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+									/>
+								</svg>
+							)}
 						</div>
 					</div>
 				</div>
@@ -103,14 +143,10 @@ const removeFilm = (id) =>{
 		arrElementFilmSections = '--------Not shows to display now 😿';
 	}
 
-	console.log('----filmsDisplay');
-	console.log(filmsDisplay);
-
 	return (
 		<div className="row-film">
 			<h3>{titleList}</h3>
-			<div className="row-film_poster"
-			>
+			<div className="row-film_poster">
 				<>{arrElementFilmSections}</>
 			</div>
 		</div>

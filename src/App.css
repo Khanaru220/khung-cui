@@ -72,7 +72,7 @@ body.background-dark {
 	transition: 1.5s all;
 }
 .background-dark #root > :not(.hero):not(.nav-bar) {
-	padding: 12rem 5% 0 5%;
+	padding: 3rem 5% 0 5%;
 	transition: 1.5s all;
 }
 
@@ -108,8 +108,10 @@ body.background-dark {
 	border: none;
 	cursor: pointer;
 	transition: 0.3s all;
+
 	/* // show when first intialize the image */
-	background-color: thistle;
+	background-image: url('./components/img/loading-poster.gif');
+
 	background-size: cover;
 	/* // for horizontal image */
 	background-position: center;
@@ -207,10 +209,14 @@ body.background-dark {
 /* ControlGridList.js  */
 .noFriendBox {
 	margin-top: 20rem;
+	margin-bottom: 9rem;
 
 	width: 100%;
 	height: 50vh;
-	background-color: rgba(0, 0, 0, 9);
+
+	background-image: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+	border-radius: 10px;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -300,48 +306,58 @@ body.background-dark {
 	margin-right: 1rem;
 }
 
-.friend-add-field button:hover {
+.friend-add-field > div:hover {
 	position: relative;
 }
 
-.friend-add-field button:hover:after {
+.friend-add-field > div:hover:after {
 	position: absolute;
 	bottom: 3rem;
 	right: -5.2rem;
-	content: 'fr-(vietnam japan africa spain us netherland denamrk iceland)';
+	content: 'fr-vietnam (japan africa spain us netherland denamrk iceland)';
 	padding: 0.5rem;
 	background-color: white;
+	color: black;
 	z-index: 1000;
 	min-width: 15rem;
 }
 
 /* PageDisplayFilms.js  */
 .hero {
+	width: 98vw;
+	max-height: 60vh;
+	overflow: hidden;
+
+	background-image: url('./components/img/loading-poster.gif');
+}
+
+.hero video {
+	transition: all 2s;
+	width: 100%;
+	cursor: pointer;
+}
+
+.hero--crop_vertical {
 	/* copy from Stackoverflow */
 	/* ensure hero-image inside 80vh, crop image top-bottom */
 	position: relative;
-	width: 98vw;
-	/* dimension: 1920x1200 */
-	height: 1200px;
-	max-height: 40vh;
-	overflow: hidden;
 
 	/* delete space from .nav-bar+* */
 	/* use 'position' instead */
 	padding-top: 0;
 	top: 9rem;
+
+	/* dimension: 1920x1200 */
+	height: 1200px;
 }
 
-.hero video {
+.hero--crop_vertical video {
 	position: absolute;
 	top: -9999px;
 	bottom: -9999px;
 	left: -9999px;
 	right: -9999px;
 	margin: auto;
-	width: 100%;
-
-	transition: all 2s;
 }
 
 /* RowFilms.js */
