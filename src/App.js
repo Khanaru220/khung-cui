@@ -1,12 +1,10 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-
-import logo from './components/img/khung-cui-logo.png'
-import mp3 from './components/img/khung-cui-pronounce.mp3'
+import logo from './components/img/khung-cui-logo.png';
+import mp3 from './components/img/khung-cui-pronounce.mp3';
 // import heroBackground from './components/img/wallpaperflare.com_wallpaper.jpg'
-import heroBackground from './components/img/cropped-1920-1200-719056.jpg'
-
+import videoHero from './components/img/video_test.mp4';
 
 // import ControlGridLists from './components/ControlGridLists';
 import React from 'react';
@@ -17,7 +15,7 @@ import generateAcc from './components/functions/generateAcc';
 import fetchAPIFilms from './components/functions/fetchAPIFilms';
 import checkFlexGap from './components/functions/checkFlexGap';
 import PageDisplayFilms from './components/DisplayPage/PageDisplayFilms';
-import FriendAddField from './components/DisplayPage/FriendAddField'
+import FriendAddField from './components/DisplayPage/FriendAddField';
 
 function App() {
 	const [accountLogin, setAccountLogin] = React.useState(null); // for 'navigate' + 'display my-list, friends'
@@ -63,9 +61,9 @@ function App() {
 		}
 	};
 
-	React.useEffect(() => { 
-		checkFlexGap()
-		 });
+	React.useEffect(() => {
+		checkFlexGap();
+	});
 
 	// (?) I need add a 'wait point' here, just pass data 'arrFilms' after it is updated
 	// @@ urgly solution, wait 'fecthing data' === separate 2 cases of (Promise/object films)
@@ -73,16 +71,19 @@ function App() {
 	if (popFilms.length > 1 && accounts.length > 1) {
 		return (
 			<BrowserRouter>
-					<div className={"nav-bar"}>
-						<img src={logo} alt="Logo of Khung cửi -- a cloth pattern"/>
-						<h1 onClick={()=> new Audio(mp3).play()}>Khung Cửi</h1>
+				<div className={'nav-bar'}>
+					<img src={logo} alt="Logo of Khung cửi -- a cloth pattern" />
+					<h1 onClick={() => new Audio(mp3).play()}>Khung Cửi</h1>
 
-						{accountLogin?.username ? <p>Hi, <strong>{accountLogin.username}</strong></p> :''}
+					{accountLogin?.username ? (
+						<p>
+							Hi, <strong>{accountLogin.username}</strong>
+						</p>
+					) : (
+						''
+					)}
+				</div>
 
-					</div>
-			
-						
-					
 				<Routes>
 					<>
 						{/* navigate to /cinema if accountLogin exist === login success */}
@@ -148,26 +149,30 @@ function App() {
 							element={
 								accountLogin ? (
 									<>
+										<div className="hero">
+											<video autoplay="true" loop muted>
+												<source src={videoHero} type="video/mp4" />
+												Your browser does not support the video tag.
+											</video>
+										</div>
 										{/* hack to enable dark-background */}
 										{document.body.classList.add('background-dark')}
-									<div>
-										<button onClick={() => setAccountLogin(null)}>
-											Sign out
-										</button>
-										<FriendAddField accounts={accounts}
-										accountLogin={accountLogin}
-										setAccounts={setAccounts} />
-										<PageDisplayFilms
-											popFilms={popFilms}
-											accountLogin={accountLogin}
-											accounts={accounts}
-											setAccounts={setAccounts}
-										/>
-									</div>
-										<div className="hero">
-												<img src={heroBackground} alt={`A man warrior from "Game of Thrones". He's sitting under the tree and inside of green forest. Looking nowhere.`}/>
+										<div>
+											<button onClick={() => setAccountLogin(null)}>
+												Sign out
+											</button>
+											<FriendAddField
+												accounts={accounts}
+												accountLogin={accountLogin}
+												setAccounts={setAccounts}
+											/>
+											<PageDisplayFilms
+												popFilms={popFilms}
+												accountLogin={accountLogin}
+												accounts={accounts}
+												setAccounts={setAccounts}
+											/>
 										</div>
-										
 									</>
 								) : (
 									<Navigate to="/signup"></Navigate>
@@ -176,19 +181,16 @@ function App() {
 						></Route>
 					</>
 				</Routes>
-				
 			</BrowserRouter>
-
 		);
 	} else {
 		return (
 			// display while "fetching" --- (upgrade this), find a way to 'add timer'
-			<p style={{fontSize:'20px', marginLeft:"50px"}}>
+			<p style={{ fontSize: '20px', marginLeft: '50px' }}>
 				We're trying get to you soon.
 				<br />
 				The traffic isn't great right now 🚜....
 			</p>
-
 		);
 	}
 }

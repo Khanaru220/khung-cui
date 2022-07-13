@@ -1,54 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
 
-@supports not (aspect-ratio: 5 / 7) { 
+@supports not (aspect-ratio: 5 / 7) {
 	/** Fallback (current, using intrinsic ratio technique) */
-  .filmCardContainer::before {
-    float: left; 
-    padding-top: 140%; 
-    content: '';
-  }
-  .filmCardContainer:after {
-    display: block;
-    content: '';
-    clear: both;
-  }
+	.filmCardContainer::before {
+		float: left;
+		padding-top: 140%;
+		content: '';
+	}
+	.filmCardContainer:after {
+		display: block;
+		content: '';
+		clear: both;
+	}
 }
 
-
-html{
-	font-size:62.5%;
+html {
+	font-size: 62.5%;
 }
 
 body {
 	font-family: Poppins, sans-serif;
-	padding:0;
-	margin:0;
-	position:relative;
-	background-color:#fff6f6;
-	font-size:1.6rem;
+	padding: 0;
+	margin: 0;
+	position: relative;
+	background-color: #fff6f6;
+	font-size: 1.6rem;
 }
 
-h1{
-	font-family:Sriracha;
-	font-size:3.8rem;
+h1 {
+	font-family: Sriracha;
+	font-size: 3.8rem;
 }
 
 h3 {
 	font-size: 3rem;
-	margin:0;
+	margin: 0;
 }
 
-button,input{
-	font-size:90%;
-	padding:0.2rem;
+button,
+input {
+	font-size: 90%;
+	padding: 0.2rem;
 }
 
-button{
-	cursor:pointer
+button {
+	cursor: pointer;
 }
-
-
 
 /* ----- */
 
@@ -68,24 +66,26 @@ body.background-dark {
 	color: #fff;
 }
 
-.background-dark, .background-dark .nav-bar + *,.nav-bar{
+.background-dark,
+.background-dark .nav-bar + *,
+.nav-bar {
 	transition: 1.5s all;
 }
 .background-dark #root > :not(.hero):not(.nav-bar) {
 	padding: 12rem 5% 0 5%;
-	transition:1.5s all
+	transition: 1.5s all;
 }
 
 /* ----- RowFilms */
-.row-film_poster{
-		display: flex;
-		gap: 3rem;
-		overflow-y: auto;
-		scrollbar-width:thin;
+.row-film_poster {
+	display: flex;
+	gap: 3rem;
+	overflow-y: auto;
+	scrollbar-width: thin;
 }
 
-.no-flexbox-gap .row-film_poster > *:not(:last-child){
-	margin-right:3rem;
+.no-flexbox-gap .row-film_poster > *:not(:last-child) {
+	margin-right: 3rem;
 }
 
 .filmCardContainer {
@@ -122,18 +122,16 @@ body.background-dark {
 	border-radius: 8px;
 }
 
-
 .filmCard:hover .filmNameContainer {
 	transform: translateX(0);
 }
 
 .filmNameContainer {
 	display: flex;
-	flex-direction:column;
+	flex-direction: column;
 	align-items: center;
-	justify-content:center;
-	position:relative;
-	
+	justify-content: center;
+	position: relative;
 
 	width: 100%;
 	height: 100%;
@@ -144,39 +142,38 @@ body.background-dark {
 	color: #fff;
 	font-weight: bold;
 	font-size: 120%;
-	text-align:center;
+	text-align: center;
 }
 
-.filmNameContainer svg{
-	position:absolute;
-	margin-top:2rem;
-	height:18%;
-	bottom:10%;
-	left:50%;
-	transform:translateX(-50%)
+.filmNameContainer svg {
+	position: absolute;
+	margin-top: 2rem;
+	height: 18%;
+	bottom: 10%;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
-.filmNameContainer .add-film:hover{
-	color:green;
+.filmNameContainer .add-film:hover {
+	color: green;
 }
-.filmNameContainer .remove-film:hover{
-	color:red;
+.filmNameContainer .remove-film:hover {
+	color: red;
 }
 
 /* ButtonsNavigateForm.js */
 
-.container-btn-navigate{
-		display: flex;
-		gap: 4rem;
-		justify-content: center;
-		align-items: center;
-		font-weight: bold;
+.container-btn-navigate {
+	display: flex;
+	gap: 4rem;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
 }
 
-.no-flexbox-gap .container-btn-navigate > *:not(:last-child){
-	margin-right:4rem;
+.no-flexbox-gap .container-btn-navigate > *:not(:last-child) {
+	margin-right: 4rem;
 }
-
 
 /* FormFilter.js */
 .formFilter {
@@ -185,15 +182,13 @@ body.background-dark {
 	/* align-items: flex-end; */
 
 	gap: 2rem;
-	font-size:1.4rem;
-	margin-bottom:4rem;
+	font-size: 1.4rem;
+	margin-bottom: 4rem;
 }
 
-.no-flexbox-gap .formFilter > *:not(:last-child){
-	margin-right:2rem;
+.no-flexbox-gap .formFilter > *:not(:last-child) {
+	margin-right: 2rem;
 }
-
-
 
 .formFilter > *:not(:last-child) {
 	/* hack to add border */
@@ -205,13 +200,13 @@ body.background-dark {
 	display: flex;
 	justify-content: flex-end;
 }
-#since{
-  width:6rem;
+#since {
+	width: 6rem;
 }
 
 /* ControlGridList.js  */
 .noFriendBox {
-	margin-top:20rem;
+	margin-top: 20rem;
 
 	width: 100%;
 	height: 50vh;
@@ -227,171 +222,165 @@ body.background-dark {
 }
 
 /* App.js */
-.nav-bar{
-	position:fixed;
-	display:flex;
-	align-items:center;
-	height:9rem;
+.nav-bar {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	height: 9rem;
 	/* height:11vh; */
-	min-height:4rem;
-	width:100vw;
-	padding:0 2rem 0 0;
-	background-color:rgb(43, 43, 43);
-	color:#fff;
-	z-index:999;
+	min-height: 4rem;
+	width: 100vw;
+	padding: 0 2rem 0 0;
+	background-color: rgb(43, 43, 43);
+	color: #fff;
+	z-index: 999;
 }
 
 .background-dark .nav-bar {
-	
-	background-color:rgba(27, 15, 49, 0.87)
-
+	background-color: rgba(27, 15, 49, 0.87);
 }
 
-
-.nav-bar *:nth-child(1){
-	margin-left:5%;
-	height:90%;
-	transition:all 0.3s
+.nav-bar *:nth-child(1) {
+	margin-left: 5%;
+	height: 90%;
+	transition: all 0.3s;
 }
 
-
-.background-dark .nav-bar *:nth-child(1){
-	margin-left:1%;
+.background-dark .nav-bar *:nth-child(1) {
+	margin-left: 1%;
 }
 
-.nav-bar h1{
-	cursor:pointer;
-	transition:all 0.3s;
-	width:max-content;
+.nav-bar h1 {
+	cursor: pointer;
+	transition: all 0.3s;
+	width: max-content;
 }
 
-.background-dark .nav-bar h1{
-	color:#4c3b75
+.background-dark .nav-bar h1 {
+	color: #4c3b75;
 }
-.nav-bar h1:hover{
-	color:#aaa
-}
-
-.background-dark .nav-bar h1:hover{
-	color:#9883c8
+.nav-bar h1:hover {
+	color: #aaa;
 }
 
-
-
-
-.nav-bar *:nth-child(2){
-	margin:0 auto;
-	position:absolute;
-	top:50%;
-	left:50%;
-	transform:translate(-50%,-50%)
+.background-dark .nav-bar h1:hover {
+	color: #9883c8;
 }
 
-.nav-bar > p{
+.nav-bar *:nth-child(2) {
+	margin: 0 auto;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.nav-bar > p {
 	/* margin-left:auto; */
 	/* don't know why margin-right of parent doesnt' work */
-	margin-left:auto;
-	padding-right:5%;
-	min-width:15rem;
-	text-align:right
+	margin-left: auto;
+	padding-right: 5%;
+	min-width: 15rem;
+	text-align: right;
 }
 
-.nav-bar + *{
-	padding-top:9rem;
+.nav-bar + * {
+	padding-top: 9rem;
 }
 
 /* FriendAddField.js */
-.friend-add-field{
-
-display: flex;
-justify-content: flex-end;
-gap:1rem;
-margin-bottom:3rem;
+.friend-add-field {
+	display: flex;
+	justify-content: flex-end;
+	gap: 1rem;
+	margin-bottom: 3rem;
 }
 
-.no-flexbox-gap .friend-add-field > *:not(:last-child){
-	margin-right:1rem;
+.no-flexbox-gap .friend-add-field > *:not(:last-child) {
+	margin-right: 1rem;
 }
 
-
-
-
-.friend-add-field button:hover{
-	position:relative;
+.friend-add-field button:hover {
+	position: relative;
 }
 
-.friend-add-field button:hover:after{
-position:absolute;
-bottom:3rem;
-right:-5.2rem;
-	content:'fr-(vietnam japan africa spain us netherland denamrk iceland)';
-padding:0.5rem;
-	background-color:white;
-	z-index:1000;
-	min-width:15rem
-
+.friend-add-field button:hover:after {
+	position: absolute;
+	bottom: 3rem;
+	right: -5.2rem;
+	content: 'fr-(vietnam japan africa spain us netherland denamrk iceland)';
+	padding: 0.5rem;
+	background-color: white;
+	z-index: 1000;
+	min-width: 15rem;
 }
-
 
 /* PageDisplayFilms.js  */
-.hero{
-	margin-top: 20rem;
-	width:100%;
-	z-index:1000;
-	transition:all 2s
-}
-.hero img{
-	width:100%;
-	transition:all 2s
+.hero {
+	/* copy from Stackoverflow */
+	/* ensure hero-image inside 80vh, crop image top-bottom */
+	position: relative;
+	width: 98vw;
+	/* dimension: 1920x1200 */
+	height: 1200px;
+	max-height: 40vh;
+	overflow: hidden;
+
+	/* delete space from .nav-bar+* */
+	/* use 'position' instead */
+	padding-top: 0;
+	top: 9rem;
 }
 
+.hero video {
+	position: absolute;
+	top: -9999px;
+	bottom: -9999px;
+	left: -9999px;
+	right: -9999px;
+	margin: auto;
+	width: 100%;
+
+	transition: all 2s;
+}
 
 /* RowFilms.js */
-.row-film{
-	margin-bottom:9rem
+.row-film {
+	margin-bottom: 9rem;
 }
 
-.row-film >h3{
+.row-film > h3 {
 	color: #c3c1c1;
-	margin-bottom:2rem;
+	margin-bottom: 2rem;
 }
-
-
-
 
 /*  */
 
-
-@media (max-width: 768px){
-	html{
-		font-size:50%;
+@media (max-width: 768px) {
+	html {
+		font-size: 50%;
 	}
-	.filmCardContainer{
-		flex: 1 0 18%
+	.filmCardContainer {
+		flex: 1 0 18%;
 	}
-	.noFriendBox{
-		font-size:1.5rem;
-		margin-top:10rem
+	.noFriendBox {
+		font-size: 1.5rem;
+		margin-top: 10rem;
 	}
-	.noFriendBox u{
-		font-size:3.1rem;
+	.noFriendBox u {
+		font-size: 3.1rem;
 	}
-	.row-film{
-		margin-bottom:5em;
-	}
-
-	.row-film_poster{
-		gap:2rem;
-	}
-	.no-flexbox-gap .row-film_poster > *:not(:last-child){
-		margin-right:2rem;
-	}
-	.filmNameContainer{
-		font-size:90%
+	.row-film {
+		margin-bottom: 5em;
 	}
 
-	
+	.row-film_poster {
+		gap: 2rem;
 	}
-
-
-
+	.no-flexbox-gap .row-film_poster > *:not(:last-child) {
+		margin-right: 2rem;
+	}
+	.filmNameContainer {
+		font-size: 90%;
+	}
+}
