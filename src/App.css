@@ -346,6 +346,8 @@ body.background-dark {
 	/* use 'position' instead */
 	padding-top: 0;
 	top: 9rem;
+	/* to balance bottom because it take with top:9rem above */
+	margin-bottom: 9rem;
 
 	/* dimension: 1920x1200 */
 	height: 1200px;
