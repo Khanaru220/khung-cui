@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import logo from './components/img/khung-cui-logo.png';
 import mp3 from './components/img/khung-cui-pronounce.mp3';
-// import heroBackground from './components/img/wallpaperflare.com_wallpaper.jpg'
 import videoHero from './components/img/video_test.mp4';
 
 // import ControlGridLists from './components/ControlGridLists';
@@ -149,12 +148,27 @@ function App() {
 							element={
 								accountLogin ? (
 									<>
-										<div className="hero">
-											<video autoplay="true" loop muted>
-												<source src={videoHero} type="video/mp4" />
-												Your browser does not support the video tag.
-											</video>
-										</div>
+										{/* because policy in Safari only allow autoplay if: mute + fullscreen */}
+										{/* (mute) (!) issue: React doesn't write 'muted' attribute in DOM */}
+										{/* (mute) dangerouslySetInnerHTML work like innerHTML */}
+										{/* (fullscreen) use attribute 'playinsline' - allow autoplay withou fullscreen */}
+
+										<div
+											className="hero"
+											id="vid"
+											dangerouslySetInnerHTML={{
+												__html: `
+												<video 
+												autoplay 
+												loop
+												muted
+												playsinline
+												>
+											<source src=${videoHero} type="video/mp4" />
+											Your browser does not support the video tag.
+										</video>`,
+											}}
+										></div>
 										{/* hack to enable dark-background */}
 										{document.body.classList.add('background-dark')}
 										<div>
