@@ -10,10 +10,9 @@ import FormAccount from './components/AccountPage/FormAccount';
 // import Button from './components/Button';
 import Initial_5Acc from './components/initial/Initial_5Acc';
 import generateAcc from './components/functions/generateAcc';
-import fetchAPIFilms from './components/functions/fetchAPIFilms';
 import PageDisplayFilms from './components/DisplayPage/PageDisplayFilms';
 import FriendAddField from './components/DisplayPage/FriendAddField';
-
+import fetchAPIFilms from './components/functions/fetchAPIFilms';
 import fetchAPIFilmsWithGenre from './components/functions/fetchAPIFilmsWithGenre';
 
 function App() {

@@ -81,7 +81,12 @@ const RowFilms = ({
 			/* when see 'array' -- JSX will help us generate multiple*/
 			/*trick transform 'empty Array' --> 'undefediend Array' --- so we can loop over*/
 			/* arrFilms.length === cards generated */
-			const posterImgURL = filmsDisplay[i].image?.original; // some film- not have poster
+
+			// load poster quality based screen width
+			const posterImgURL =
+				window.innerWidth >= 780
+					? filmsDisplay[i].image?.original
+					: filmsDisplay[i].image?.medium; // some film- not have poster
 			const nameFilm = filmsDisplay[i].name;
 			return (
 				// background-image: based on "posterImgURL" --> if (false) use default img from local
