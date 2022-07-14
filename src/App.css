@@ -407,6 +407,10 @@ body.background-dark {
 		padding-bottom: 1rem;
 	}
 
+	.hero {
+		max-height: 70vh;
+	}
+
 	.hero video {
 		height: 100%; /* to fill the wrapper on small screen */
 	}

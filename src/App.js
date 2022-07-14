@@ -186,7 +186,7 @@ function App() {
 											// video_0: default
 											// video_1,2: crop vertical to center
 											className={`hero ${
-												indexHeroVideo !== 0 ? 'hero--crop_vertical' : ''
+												indexHeroVideo !== 1 ? 'hero--crop_vertical' : ''
 											}`}
 											id="vid"
 											onClick={() => {
