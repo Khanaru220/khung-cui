@@ -27,7 +27,6 @@ function App() {
 
 	useEffect(() => {
 		// (1,2) fetching after login --> make first visit faster
-		if (!accountLogin) return;
 
 		const fetchGenreFilms = async (...genres) => {
 			const objGenreFilms = {};
@@ -45,12 +44,18 @@ function App() {
 		};
 
 		const fetchFilms = async () => {
-			await fetchGenreFilms('anime', 'music', 'drama', 'Adventure'); //(!) i don't hanlde the invalid-genre yet
-			await fetchPopFilms();
+			// (in loginPage) fetch popFilms - user login smooth, have thing to see first
+			if (!accountLogin) {
+				await fetchPopFilms();
+				console.log('Popular films are ready');
+			} else {
+				// (after login) fetch genresFilms - need times
+				// (?) better, display 'Loading section' (not whole page, because it prevent login smooth) --> only the Row films not finish fetching
+				await fetchGenreFilms('anime', 'music', 'drama', 'Adventure'); //(!) i don't hanlde the invalid-genre yet
+				console.log('Genres films are ready');
+			}
 		};
 		fetchFilms();
-
-		console.log('Fetching finish: Random films are ready');
 	}, [accountLogin]);
 
 	useEffect(() => {
@@ -95,6 +100,7 @@ function App() {
 	// (?) I need add a 'wait point' here, just pass data 'arrFilms' after it is updated
 	// @@ urgly solution, wait 'fecthing data' === separate 2 cases of (Promise/object films)
 
+	// visit website: wait until fetch video to initalAccounts success
 	if (accounts.length > 1) {
 		return (
 			<BrowserRouter>
@@ -174,6 +180,7 @@ function App() {
 						<Route
 							path="/cinema"
 							element={
+								// after login: wait until popFilms fetching - if not, user see nothing and don't know what to do
 								accountLogin ? (
 									<>
 										{/* because policy in Safari only allow autoplay if: mute + fullscreen */}
