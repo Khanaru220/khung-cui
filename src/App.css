@@ -19,7 +19,7 @@
 	/** Fallback (current, using intrinsic ratio technique) */
 	.hero::before {
 		float: left;
-		padding-top: 55.6%;
+		padding-top: 56%;
 		content: '';
 	}
 	.hero:after {
