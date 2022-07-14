@@ -2,7 +2,7 @@ const fetchAPIFilms = async (numberFilms = 100) => {
 	// Random:  (0-100 pages)  + (100 first index)
 	//--- do this in local varaible to limit only 1 call API, instead call each time for different 'id'
 	const data = await fetch(
-		`https://api.tvmaze.com/shows?page=${Math.round(Math.random() * 100)}`, // I want it more Random pages for each call, for more category -- (?) does it neccesary
+		`https://api.tvmaze.com/shows?page=${Math.round(Math.random() * 200)}`, // I want it more Random pages for each call, for more category -- (?) does it neccesary
 		{ method: 'GET' }
 	).then((response) => response.json()); // (?) don't know what .json() do --> because 'response' doesnt seem like a contain any data
 

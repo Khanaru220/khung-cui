@@ -19,7 +19,7 @@
 	/** Fallback (current, using intrinsic ratio technique) */
 	.hero::before {
 		float: left;
-		padding-right: 180%;
+		padding-top: 55.6%;
 		content: '';
 	}
 	.hero:after {
@@ -40,6 +40,8 @@ body {
 	position: relative;
 	background-color: #fff6f6;
 	font-size: 1.6rem;
+
+	overflow-x: hidden;
 }
 
 h1 {
@@ -257,7 +259,7 @@ body.background-dark {
 }
 
 .background-dark .nav-bar {
-	background-color: rgba(27, 15, 49, 0.87);
+	background-color: rgba(27, 15, 49);
 }
 
 .nav-bar *:nth-child(1) {
@@ -341,8 +343,8 @@ body.background-dark {
 	display: flex;
 	justify-content: center;
 
-	width: 98vw;
-	aspect-ratio: 9/5; /* must pre-set wrapper must bigger than video, to prevent "flash change dimension" happen only when we set wrapper size depend on video*/
+	width: 100vw;
+	/*aspect-ratio: 9/5;  must pre-set wrapper must bigger than video, to prevent "flash change dimension" happen only when we set wrapper size depend on video*/
 	max-height: 60vh;
 	overflow: hidden;
 	/* (!) bugs, overflow don't work with top-size (when user ,hero--crop_vertical) */

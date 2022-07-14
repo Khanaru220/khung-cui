@@ -2,6 +2,7 @@ import RowFilms from './RowFilms';
 
 const ControlGridLists = ({
 	popFilms,
+	genreFilteredFilms,
 	objFilters,
 	accounts, //to find 'arrFriendFilms'
 	accountLogin,
@@ -59,6 +60,15 @@ const ControlGridLists = ({
 				setAccounts={setAccounts}
 				titleList="Popular"
 				arrFilms={popFilms}
+				objFilters={objFilters}
+			/>
+			{/*1.2 genresFilteredFilms list*/}
+			<RowFilms
+				accounts={accounts}
+				accountLogin={accountLogin}
+				setAccounts={setAccounts}
+				titleList="Cool Anime"
+				arrFilms={genreFilteredFilms}
 				objFilters={objFilters}
 			/>
 			{/*2. conditional list -- Friend's list*/}

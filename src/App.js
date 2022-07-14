@@ -4,7 +4,7 @@ import './App.css';
 import { logo, mp3, heroVideos, heroSmallVideos } from './components/img/index';
 
 // import ControlGridLists from './components/ControlGridLists';
-import React from 'react';
+import React, { useEffect } from 'react';
 import FormAccount from './components/AccountPage/FormAccount';
 
 // import Button from './components/Button';
@@ -15,16 +15,42 @@ import checkFlexGap from './components/functions/checkFlexGap';
 import PageDisplayFilms from './components/DisplayPage/PageDisplayFilms';
 import FriendAddField from './components/DisplayPage/FriendAddField';
 
+import fetchAPIFilmsWithGenre from './components/functions/fetchAPIFilmsWithGenre';
+
 function App() {
 	const [indexHeroVideo, setIndexHeroVideo] = React.useState(0);
 	const [accountLogin, setAccountLogin] = React.useState(null); // for 'navigate' + 'display my-list, friends'
 	const [accounts, setAccounts] = React.useState(() => Initial_5Acc());
-	const [popFilms, setPopFilms] = React.useState(() =>
-		fetchAPIFilms(50).then((data) => setPopFilms(data))
-	); // (?) do it need use 'state' here, because i just want store 'films' to local only one, and don't mutate it
+	const [genreFilteredFilms, setGenreFilteredFilms] = React.useState([]);
+	const [popFilms, setPopFilms] = React.useState([]); // (?) do it need use 'state' here, because i just want store 'films' to local only one, and don't mutate it
 	// (!) temporary solution = i need a way to 'store fetch data' in to 'state'
 	// (?) need research why 'lazy intializer' can solve this problem
 	// (!) 'state' popFilms is unnessary when we're in 'Login page'
+
+	useEffect(() => {
+		// trigger when ever login success
+		// fetching when 'null' --> first visit + fetch before user 'login'
+		if (accountLogin) return;
+
+		const fetchFilms = async () => {
+			const genreFilms = await fetchAPIFilmsWithGenre(20, 'anime');
+			const popFilms = await fetchAPIFilms(50);
+
+			setGenreFilteredFilms(genreFilms);
+			setPopFilms(popFilms);
+		};
+
+		fetchFilms();
+
+		console.log('Films are ready');
+	}, [accountLogin]);
+
+	// useEffect(() => {
+	// 	// display 'accounts' once
+	// 	// and when register, login success
+	// 	console.log('----accounts');
+	// 	console.log(accounts);
+	// }, [accounts, accountLogin]);
 
 	// (?) i don't know should write 'function' inside or outside component
 	// ---> i want write outside to see it more clean, but 'state' declare inside
@@ -41,8 +67,6 @@ function App() {
     Your account "${username}" is ready to use.`);
 		}
 	};
-	console.log('----accounts');
-	console.log(accounts);
 
 	const doLogin = ({ username, password }) => {
 		// matching 'username' in 'accounts'
@@ -198,6 +222,7 @@ function App() {
 											/>
 											<PageDisplayFilms
 												popFilms={popFilms}
+												genreFilteredFilms={genreFilteredFilms}
 												accountLogin={accountLogin}
 												accounts={accounts}
 												setAccounts={setAccounts}

@@ -3,7 +3,13 @@ import ControlGridLists from './../ControlGridLists';
 import React from 'react';
 // import heroBackground from './../img/hero-background.jpg'
 
-const PageDisplayFilms = ({ popFilms, accounts, accountLogin,setAccounts }) => {
+const PageDisplayFilms = ({
+	popFilms,
+	genreFilteredFilms,
+	accounts,
+	accountLogin,
+	setAccounts,
+}) => {
 	// (need change) arrFitlers --> objFilters
 	const [objFitlers, setObjFitlers] = React.useState({
 		// 'friends' will be process to "render or not" in 'ControlGridList.js'
@@ -29,6 +35,7 @@ const PageDisplayFilms = ({ popFilms, accounts, accountLogin,setAccounts }) => {
 			/>
 			<ControlGridLists
 				popFilms={popFilms}
+				genreFilteredFilms={genreFilteredFilms}
 				objFilters={objFitlers}
 				accounts={accounts}
 				setAccounts={setAccounts}
