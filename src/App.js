@@ -1,11 +1,13 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-import logo from './components/img/khung-cui-logo.png';
-import mp3 from './components/img/khung-cui-pronounce.mp3';
-import videoHero_0 from './components/img/video_test_0.mp4';
-import videoHero_1 from './components/img/video_test_1.mp4';
-import videoHero_2 from './components/img/video_test_2.mp4';
+import {
+	logo,
+	mp3,
+	loadingPoster,
+	heroVideos,
+	heroSmallVideos,
+} from './components/img/index';
 
 // import ControlGridLists from './components/ControlGridLists';
 import React from 'react';
@@ -19,11 +21,8 @@ import checkFlexGap from './components/functions/checkFlexGap';
 import PageDisplayFilms from './components/DisplayPage/PageDisplayFilms';
 import FriendAddField from './components/DisplayPage/FriendAddField';
 
-// utility
-import changeHeroVideo from './components/functions/changeHeroVideo';
-
 function App() {
-	const [heroVideoSrc, setHeroVideoSrc] = React.useState(videoHero_0);
+	const [indexHeroVideo, setIndexHeroVideo] = React.useState(0);
 	const [accountLogin, setAccountLogin] = React.useState(null); // for 'navigate' + 'display my-list, friends'
 	const [accounts, setAccounts] = React.useState(() => Initial_5Acc());
 	const [popFilms, setPopFilms] = React.useState(() =>
@@ -164,19 +163,16 @@ function App() {
 											// video_0: default
 											// video_1,2: crop vertical to center
 											className={`hero ${
-												heroVideoSrc !== videoHero_0 && 'hero--crop_vertical'
+												indexHeroVideo !== 0 ? 'hero--crop_vertical' : ''
 											}`}
 											id="vid"
-											onClick={(e) =>
-												setHeroVideoSrc(
-													changeHeroVideo(
-														e,
-														videoHero_0,
-														videoHero_1,
-														videoHero_2
-													)
-												)
-											}
+											onClick={() => {
+												setIndexHeroVideo(
+													indexHeroVideo === heroVideos.length - 1
+														? 0
+														: indexHeroVideo + 1
+												);
+											}}
 											dangerouslySetInnerHTML={{
 												__html: `
 												<video 
@@ -184,12 +180,18 @@ function App() {
 												loop
 												muted
 												playsinline
+												poster=${loadingPoster}
 												>
-											<source src=${heroVideoSrc} type="video/mp4" />
+												<source src=${
+													window.innerWidth <= 480
+														? heroSmallVideos[indexHeroVideo]
+														: heroVideos[indexHeroVideo]
+												} type="video/mp4"/>
 											Your browser does not support the video tag.
 										</video>`,
 											}}
 										/>
+										{/* 'media' fro response video-src attribute no longer support */}
 										{/* hack to enable dark-background */}
 										{document.body.classList.add('background-dark')}
 										<div>

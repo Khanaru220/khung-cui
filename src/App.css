@@ -324,42 +324,24 @@ body.background-dark {
 
 /* PageDisplayFilms.js  */
 .hero {
-	width: 98vw;
+	display: flex;
+	justify-content: center;
+
 	max-height: 60vh;
 	overflow: hidden;
-
-	background-image: url('./components/img/loading-poster.gif');
+	/* (!) bugs, overflow don't work with top-size (when user ,hero--crop_vertical) */
 }
 
 .hero video {
 	transition: all 2s;
-	width: 100%;
+	width: 100vw;
+	height: 100%;
+
 	cursor: pointer;
 }
 
 .hero--crop_vertical {
-	/* copy from Stackoverflow */
-	/* ensure hero-image inside 80vh, crop image top-bottom */
-	position: relative;
-
-	/* delete space from .nav-bar+* */
-	/* use 'position' instead */
-	padding-top: 0;
-	top: 9rem;
-	/* to balance bottom because it take with top:9rem above */
-	margin-bottom: 9rem;
-
-	/* dimension: 1920x1200 */
-	height: 1200px;
-}
-
-.hero--crop_vertical video {
-	position: absolute;
-	top: -9999px;
-	bottom: -9999px;
-	left: -9999px;
-	right: -9999px;
-	margin: auto;
+	align-items: center;
 }
 
 /* RowFilms.js */
