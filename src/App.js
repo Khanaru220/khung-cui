@@ -1,13 +1,7 @@
-import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-import {
-	logo,
-	mp3,
-	loadingPoster,
-	heroVideos,
-	heroSmallVideos,
-} from './components/img/index';
+import './App.css';
+import { logo, mp3, heroVideos, heroSmallVideos } from './components/img/index';
 
 // import ControlGridLists from './components/ControlGridLists';
 import React from 'react';
@@ -175,20 +169,19 @@ function App() {
 											}}
 											dangerouslySetInnerHTML={{
 												__html: `
-												<video 
-												autoplay 
-												loop
-												muted
-												playsinline
-												poster=${loadingPoster}
-												>
-												<source src=${
-													window.innerWidth <= 480
-														? heroSmallVideos[indexHeroVideo]
-														: heroVideos[indexHeroVideo]
-												} type="video/mp4"/>
-											Your browser does not support the video tag.
-										</video>`,
+										<video 
+										autoplay 
+										loop
+										muted
+										playsinline
+										>
+										<source src=${
+											window.innerWidth <= 480
+												? heroSmallVideos[indexHeroVideo]
+												: heroVideos[indexHeroVideo]
+										} type="video/mp4"/>
+									Your browser does not support the video tag.
+								</video>`,
 											}}
 										/>
 										{/* 'media' fro response video-src attribute no longer support */}
