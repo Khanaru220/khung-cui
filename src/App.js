@@ -27,8 +27,8 @@ function App() {
 	// (!) 'state' popFilms is unnessary when we're in 'Login page'
 
 	useEffect(() => {
-		// (1,2) fetching when 'null' --> first visit + fetch before user 'login'
-		if (accountLogin) return;
+		// (1,2) fetching after login --> make first visit faster
+		if (!accountLogin) return;
 
 		const fetchGenreFilms = async (...genres) => {
 			const objGenreFilms = {};
@@ -96,7 +96,7 @@ function App() {
 	// (?) I need add a 'wait point' here, just pass data 'arrFilms' after it is updated
 	// @@ urgly solution, wait 'fecthing data' === separate 2 cases of (Promise/object films)
 
-	if (popFilms.length > 1 && accounts.length > 1) {
+	if (accounts.length > 1) {
 		return (
 			<BrowserRouter>
 				<div className={'nav-bar'}>

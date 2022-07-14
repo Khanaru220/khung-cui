@@ -73,7 +73,7 @@ button {
 
 .container-fullScreen {
 	position: relative;
-	height: 80vh;
+	height: 100vh; /* (fix) when open dev-box, narrow the height -> we can scroll up to see form */
 	/* width: 100vw; */
 }
 
@@ -344,7 +344,7 @@ body.background-dark {
 	justify-content: center;
 
 	width: 100vw;
-	/*aspect-ratio: 9/5;  must pre-set wrapper must bigger than video, to prevent "flash change dimension" happen only when we set wrapper size depend on video*/
+	aspect-ratio: 9/5; /* must pre-set wrapper must bigger than video, to prevent "flash change dimension" happen only when we set wrapper size depend on video*/
 	max-height: 60vh;
 	overflow: hidden;
 	/* (!) bugs, overflow don't work with top-size (when user ,hero--crop_vertical) */
@@ -356,7 +356,7 @@ body.background-dark {
 .hero video {
 	transition: all 2s;
 	width: 100%;
-	height: fit-content; /* (!) don't know why, but know 'height' from parent no-longer, because we use aspect-ratio*/
+	height: fit-content; /*ensure scale to full on large screen*/
 
 	cursor: pointer;
 }
@@ -405,5 +405,9 @@ body.background-dark {
 	.filmNameContainer {
 		font-size: 90%;
 		padding-bottom: 1rem;
+	}
+
+	.hero video {
+		height: 100%; /* to fill the wrapper on small screen */
 	}
 }
