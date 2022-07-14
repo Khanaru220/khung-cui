@@ -50,7 +50,7 @@ h1 {
 }
 
 h3 {
-	font-size: 3rem;
+	font-size: 2.5rem;
 	margin: 0;
 }
 
@@ -114,7 +114,7 @@ body.background-dark {
 	max-width: 18%;
 	aspect-ratio: 5/7;
 	position: relative;
-	padding-bottom: 4rem;
+	padding-bottom: 2rem;
 	overflow: hidden;
 }
 
@@ -367,12 +367,12 @@ body.background-dark {
 
 /* RowFilms.js */
 .row-film {
-	margin-bottom: 9rem;
+	margin-bottom: 3rem;
 }
 
 .row-film > h3 {
 	color: #c3c1c1;
-	margin-bottom: 2rem;
+	margin-bottom: 1rem;
 }
 
 /*  */
@@ -392,16 +392,18 @@ body.background-dark {
 		font-size: 3.1rem;
 	}
 	.row-film {
-		margin-bottom: 5em;
+		margin-bottom: 2rem;
 	}
 
 	.row-film_poster {
 		gap: 2rem;
 	}
+
 	.no-flexbox-gap .row-film_poster > *:not(:last-child) {
 		margin-right: 2rem;
 	}
 	.filmNameContainer {
 		font-size: 90%;
+		padding-bottom: 1rem;
 	}
 }

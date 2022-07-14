@@ -40,7 +40,7 @@ class Acc {
 				quantityFilms,
 				0,
 				showsHasImage.length - 1
-			).forEach((num) => filmHolder.push(showsHasImage[num].show));
+			).forEach((num) => filmHolder.unshift(showsHasImage[num].show));
 			// (!) API 'search' need read property 'show' to access detail
 		};
 
