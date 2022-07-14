@@ -11,7 +11,6 @@ import FormAccount from './components/AccountPage/FormAccount';
 import Initial_5Acc from './components/initial/Initial_5Acc';
 import generateAcc from './components/functions/generateAcc';
 import fetchAPIFilms from './components/functions/fetchAPIFilms';
-import checkFlexGap from './components/functions/checkFlexGap';
 import PageDisplayFilms from './components/DisplayPage/PageDisplayFilms';
 import FriendAddField from './components/DisplayPage/FriendAddField';
 
@@ -21,36 +20,46 @@ function App() {
 	const [indexHeroVideo, setIndexHeroVideo] = React.useState(0);
 	const [accountLogin, setAccountLogin] = React.useState(null); // for 'navigate' + 'display my-list, friends'
 	const [accounts, setAccounts] = React.useState(() => Initial_5Acc());
-	const [genreFilteredFilms, setGenreFilteredFilms] = React.useState([]);
+	const [genreFilteredFilms, setGenreFilteredFilms] = React.useState({});
 	const [popFilms, setPopFilms] = React.useState([]); // (?) do it need use 'state' here, because i just want store 'films' to local only one, and don't mutate it
 	// (!) temporary solution = i need a way to 'store fetch data' in to 'state'
 	// (?) need research why 'lazy intializer' can solve this problem
 	// (!) 'state' popFilms is unnessary when we're in 'Login page'
 
 	useEffect(() => {
-		// trigger when ever login success
-		// fetching when 'null' --> first visit + fetch before user 'login'
+		// (1,2) fetching when 'null' --> first visit + fetch before user 'login'
 		if (accountLogin) return;
 
-		const fetchFilms = async () => {
-			const genreFilms = await fetchAPIFilmsWithGenre(20, 'anime');
-			const popFilms = await fetchAPIFilms(50);
+		const fetchGenreFilms = async (...genres) => {
+			const objGenreFilms = {};
 
-			setGenreFilteredFilms(genreFilms);
+			for (const genre of genres) {
+				objGenreFilms[genre] = await fetchAPIFilmsWithGenre(10, genre);
+			}
+
+			setGenreFilteredFilms(objGenreFilms);
+		};
+
+		const fetchPopFilms = async () => {
+			const popFilms = await fetchAPIFilms(30);
 			setPopFilms(popFilms);
 		};
 
+		const fetchFilms = async () => {
+			await fetchGenreFilms('anime', 'music', 'drama', 'Adventure'); //(!) i don't hanlde the invalid-genre yet
+			await fetchPopFilms();
+		};
 		fetchFilms();
 
-		console.log('Films are ready');
+		console.log('Fetching finish: Random films are ready');
 	}, [accountLogin]);
 
-	// useEffect(() => {
-	// 	// display 'accounts' once
-	// 	// and when register, login success
-	// 	console.log('----accounts');
-	// 	console.log(accounts);
-	// }, [accounts, accountLogin]);
+	useEffect(() => {
+		// display 'accounts' once
+		// and when register success
+		console.log('---users---');
+		console.log(accounts);
+	}, [accounts]);
 
 	// (?) i don't know should write 'function' inside or outside component
 	// ---> i want write outside to see it more clean, but 'state' declare inside
@@ -83,10 +92,6 @@ function App() {
 			alert('🔴 Wrong PASSWORD. Please try again.');
 		}
 	};
-
-	React.useEffect(() => {
-		checkFlexGap();
-	});
 
 	// (?) I need add a 'wait point' here, just pass data 'arrFilms' after it is updated
 	// @@ urgly solution, wait 'fecthing data' === separate 2 cases of (Promise/object films)

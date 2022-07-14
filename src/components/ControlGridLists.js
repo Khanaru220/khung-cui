@@ -1,4 +1,5 @@
 import RowFilms from './RowFilms';
+import toCapitalizeFirstLetter from './functions/toCapitalizeFirstLetter';
 
 const ControlGridLists = ({
 	popFilms,
@@ -8,7 +9,7 @@ const ControlGridLists = ({
 	accountLogin,
 	setAccounts,
 }) => {
-	// ------------------ FRIENDLIST --------
+	// ------------------ FRIENDLIST(start) --------
 	// (1) allFriendsList --> save name and display on <FormFilter> as 'option'
 	// (2) checked <option> --> update to 'obj.Filters.friends'
 	// (3) 'obj.Filters.friends' --> pass to this component and process
@@ -25,7 +26,7 @@ const ControlGridLists = ({
 					accountLogin={accountLogin}
 					setAccounts={setAccounts}
 					key={i}
-					titleList={`${accFriend.name}'s list`}
+					titleList={`😊 ${accFriend.name}'s list`}
 					arrFilms={accFriend.likedFilms}
 					objFilters={objFilters}
 				/>
@@ -34,7 +35,7 @@ const ControlGridLists = ({
 	}
 	// ----------------- FRIENDLSIT (end) --------
 
-	// ----------------- MY LSIT --------
+	// ----------------- MY LSIT (start) --------
 	const myFilmSection = (
 		<RowFilms
 			accounts={accounts}
@@ -49,6 +50,27 @@ const ControlGridLists = ({
 
 	// ----------------- MY LSIT (end) --------
 
+	// ----------------- GENRES LIST (start) --------
+	const generateRowFilmsWithGenre = (genreFilteredFilms) => {
+		const arrRowFilms = [];
+		for (const genre in genreFilteredFilms) {
+			arrRowFilms.push(
+				<RowFilms
+					key={arrRowFilms.length}
+					accounts={accounts}
+					accountLogin={accountLogin}
+					setAccounts={setAccounts}
+					titleList={toCapitalizeFirstLetter(genre)}
+					arrFilms={genreFilteredFilms[genre]}
+					objFilters={objFilters}
+				/>
+			);
+		}
+		return arrRowFilms;
+	};
+
+	// ----------------- GENRES LIST (end) --------
+
 	return (
 		<>
 			{/*0. my list on top*/}
@@ -62,15 +84,10 @@ const ControlGridLists = ({
 				arrFilms={popFilms}
 				objFilters={objFilters}
 			/>
+
 			{/*1.2 genresFilteredFilms list*/}
-			<RowFilms
-				accounts={accounts}
-				accountLogin={accountLogin}
-				setAccounts={setAccounts}
-				titleList="Cool Anime"
-				arrFilms={genreFilteredFilms}
-				objFilters={objFilters}
-			/>
+			{generateRowFilmsWithGenre(genreFilteredFilms)}
+
 			{/*2. conditional list -- Friend's list*/}
 			{arrAllFriendsLists ? (
 				arrAllFriendsLists

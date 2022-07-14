@@ -1,6 +1,6 @@
 import toCapitalizeFirstLetter from './toCapitalizeFirstLetter';
 
-const fetchAPIFilmsWithGenre = async (numberFilms = 20, genre = 'anime') => {
+const fetchAPIFilmsWithGenre = async (numberFilms = 10, genre) => {
 	// 1. films holder
 	let films = [];
 
