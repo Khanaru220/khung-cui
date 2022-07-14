@@ -340,6 +340,8 @@ body.background-dark {
 
 /* PageDisplayFilms.js  */
 .hero {
+	position: relative; /* for .hero--guide_box */
+
 	display: flex;
 	justify-content: center;
 
@@ -359,6 +361,16 @@ body.background-dark {
 	height: fit-content; /*ensure scale to full on large screen*/
 
 	cursor: pointer;
+}
+
+.hero-guide_box {
+	position: absolute;
+	bottom: 0;
+	left: 0.5rem;
+	font-size: 1.2rem;
+
+	color: rgba(255, 255, 255, 0.87);
+	margin: 0;
 }
 
 .hero--crop_vertical {
@@ -413,5 +425,9 @@ body.background-dark {
 
 	.hero video {
 		height: 100%; /* to fill the wrapper on small screen */
+	}
+
+	.hero-guide_box {
+		font-size: 1rem;
 	}
 }

@@ -90,7 +90,7 @@ function App() {
   Please double-check USERNAME if you has created account.`
 			);
 		} else if (acc.password === password) {
-			alert(`🟢 Welcome back, ${username}`);
+			alert(`🧶 Welcome back, ${username}`);
 			setAccountLogin(acc);
 		} else {
 			alert('🔴 Wrong PASSWORD. Please try again.');
@@ -216,9 +216,14 @@ function App() {
 												: heroVideos[indexHeroVideo]
 										} type="video/mp4"/>
 									Your browser does not support the video tag.
-								</video>`,
+								</video>
+								<p class="hero-guide_box">
+												<b>↑</b> click me
+											</p>
+								`,
 											}}
 										/>
+
 										{/* 'media' fro response video-src attribute no longer support */}
 										{/* hack to enable dark-background */}
 										{document.body.classList.add('background-dark')}
