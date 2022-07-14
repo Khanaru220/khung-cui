@@ -76,8 +76,7 @@ function App() {
 		} else {
 			// create new acc
 			setAccounts([...accounts, generateAcc({ username, password, country })]);
-			alert(`🎉 Congrate! 
-    Your account "${username}" is ready to use.`);
+			alert(`🎉 Congrate! Your account "${username}" is ready to use.`);
 		}
 	};
 

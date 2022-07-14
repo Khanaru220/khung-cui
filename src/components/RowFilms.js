@@ -124,6 +124,18 @@ const RowFilms = ({
 								<svg
 									className="add-film h-6 w-6"
 									onClick={(e) => {
+										// display 'added to' message
+										e.target
+											.closest('.filmCard')
+											.classList.add('filmCard-noticeToFavour');
+										setTimeout(
+											() =>
+												e.target
+													.closest('.filmCard')
+													.classList.remove('filmCard-noticeToFavour'),
+											1000
+										);
+
 										addFilm(e.target.closest('.filmCard').dataset.id);
 									}}
 									xmlns="http://www.w3.org/2000/svg"
