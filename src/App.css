@@ -1,6 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
 
+/* CUSTOM PROPERTIES (start) */
+body {
+	--nav-bar-height: 9rem;
+	--bg-color: #fff6f6;
+	--nav-bar-bg-color: rgb(43, 43, 43);
+	--body-text-color: #000;
+}
+body.background-dark {
+	--bg-color: #0d1118;
+	--nav-bar-bg-color: rgba(27, 15, 49);
+	--body-text-color: #fff;
+}
+/* CUSTOM PROPERTIES  (end) */
+
+/* SUPPORT MY IPHONE (start) */
 @supports not (aspect-ratio: 5 / 7) {
 	/** Fallback (current, using intrinsic ratio technique) */
 	.filmCardContainer::before {
@@ -28,18 +43,24 @@
 		clear: both;
 	}
 }
+/* SUPPORT MY IPHONE (end) */
 
+/* GENERAL SELECTER (start) */
 html {
 	font-size: 62.5%;
+
+	scroll-behavior: smooth;
 }
 
 body {
-	font-family: Poppins, sans-serif;
 	padding: 0;
 	margin: 0;
 	position: relative;
-	background-color: #fff6f6;
+	background-color: var(--bg-color);
+
+	font-family: Poppins, sans-serif;
 	font-size: 1.6rem;
+	color: var(--body-text-color);
 
 	overflow-x: hidden;
 }
@@ -63,8 +84,7 @@ input {
 button {
 	cursor: pointer;
 }
-
-/* ----- */
+/* GENERAL SELECTER (end) */
 
 .btn-nav-highlight {
 	border: none;
@@ -75,11 +95,6 @@ button {
 	position: relative;
 	height: 100vh; /* (fix) when open dev-box, narrow the height -> we can scroll up to see form */
 	/* width: 100vw; */
-}
-
-body.background-dark {
-	background-color: #0d1118;
-	color: #fff;
 }
 
 .background-dark,
@@ -116,6 +131,10 @@ body.background-dark {
 	position: relative;
 	padding-bottom: 2rem;
 	overflow: hidden;
+}
+
+.filmCardContainer--popular {
+	flex: 1 0 18%;
 }
 
 .filmCard {
@@ -270,29 +289,40 @@ body.background-dark {
 	position: fixed;
 	display: flex;
 	align-items: center;
-	height: 9rem;
+	height: var(--nav-bar-height);
 	/* height:11vh; */
 	min-height: 4rem;
 	width: 100vw;
 	padding: 0 2rem 0 0;
-	background-color: rgb(43, 43, 43);
+	background-color: var(--nav-bar-bg-color);
 	color: #fff;
 	z-index: 999;
 }
 
-.background-dark .nav-bar {
-	background-color: rgba(27, 15, 49);
-}
-
-.nav-bar *:nth-child(1) {
+/* .nav-bar *:nth-child(1) {
 	margin-left: 5%;
 	height: 90%;
 	transition: all 0.3s;
+} */
+
+.nav-bar_logo-wrapper {
+	height: 90%;
+	margin-left: 5%;
+	transition: all 0.3s;
 }
 
-.background-dark .nav-bar *:nth-child(1) {
-	margin-left: 1%;
+.background-dark .nav-bar_logo-wrapper {
+	margin-left: 2%;
+	height: 80%;
 }
+
+.nav-bar_logo-wrapper > img {
+	height: 100%;
+}
+
+/* .background-dark .nav-bar *:nth-child(1) {
+	margin-left: 1%;
+} */
 
 .nav-bar h1 {
 	cursor: pointer;
@@ -329,7 +359,7 @@ body.background-dark {
 }
 
 .nav-bar + * {
-	padding-top: 9rem;
+	padding-top: var(--nav-bar-height);
 }
 
 /* FriendAddField.js */
@@ -415,9 +445,24 @@ body.background-dark {
 	html {
 		font-size: 50%;
 	}
+
+	.hero {
+		max-height: 70vh;
+	}
+	.hero video {
+		height: 100%; /* to fill the wrapper on small screen */
+	}
+	.hero-guide_box {
+		font-size: 1rem;
+	}
+
 	.filmCardContainer {
 		flex: 1 0 18%;
 	}
+	.filmCardContainer--popular {
+		min-width: 15rem;
+	}
+
 	.noFriendBox {
 		font-size: 1.5rem;
 		margin-top: 10rem;
@@ -425,31 +470,18 @@ body.background-dark {
 	.noFriendBox u {
 		font-size: 3.1rem;
 	}
+
 	.row-film {
 		margin-bottom: 2rem;
 	}
-
 	.row-film_poster {
 		gap: 2rem;
 	}
-
 	.no-flexbox-gap .row-film_poster > *:not(:last-child) {
 		margin-right: 2rem;
 	}
 	.filmNameContainer {
 		font-size: 90%;
 		padding-bottom: 1rem;
-	}
-
-	.hero {
-		max-height: 70vh;
-	}
-
-	.hero video {
-		height: 100%; /* to fill the wrapper on small screen */
-	}
-
-	.hero-guide_box {
-		font-size: 1rem;
 	}
 }

@@ -90,7 +90,12 @@ const RowFilms = ({
 			const nameFilm = filmsDisplay[i].name;
 			return (
 				// background-image: based on "posterImgURL" --> if (false) use default img from local
-				<div className="filmCardContainer" key={i}>
+				<div
+					className={`filmCardContainer ${
+						titleList === 'Popular' ? 'filmCardContainer--popular' : ''
+					}`}
+					key={i}
+				>
 					<div
 						data-id={filmsDisplay[i].id}
 						className="filmCard"

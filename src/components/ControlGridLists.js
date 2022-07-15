@@ -15,8 +15,6 @@ const ControlGridLists = ({
 	// (3) 'obj.Filters.friends' --> pass to this component and process
 	let arrAllFriendsLists;
 	if (objFilters.friends?.length > 0) {
-		console.log('----objFilters');
-		console.log(objFilters);
 		arrAllFriendsLists = objFilters.friends?.map((friend, i) => {
 			// lookup 'friend' --> 'accounts' --> 'acc' --> 'likedFilms'
 			const accFriend = accounts.find((acc) => acc.username === friend);

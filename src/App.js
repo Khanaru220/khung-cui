@@ -4,7 +4,7 @@ import './App.css';
 import { logo, mp3, heroVideos, heroSmallVideos } from './components/img/index';
 
 // import ControlGridLists from './components/ControlGridLists';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import FormAccount from './components/AccountPage/FormAccount';
 
 // import Button from './components/Button';
@@ -47,23 +47,36 @@ function App() {
 			// (in loginPage) fetch popFilms - user login smooth, have thing to see first
 			if (!accountLogin) {
 				await fetchPopFilms();
-				console.log('Popular films are ready');
+				console.log('[Popular] films are ready');
 			} else {
 				// (after login) fetch genresFilms - need times
 				// (?) better, display 'Loading section' (not whole page, because it prevent login smooth) --> only the Row films not finish fetching
-				await fetchGenreFilms('anime', 'music', 'drama', 'Adventure'); //(!) i don't hanlde the invalid-genre yet
-				console.log('Genres films are ready');
+				await fetchGenreFilms('anime', 'music', 'crime', 'travel'); //(!) i don't hanlde the invalid-genre yet
+				console.log('[Genres] films are ready');
 			}
 		};
 		fetchFilms();
 	}, [accountLogin]);
 
+	// display 'accounts' when register success = keep track .length
+	// (not run while change other property: likeFilms,...)
+	// useRef(initla value) is a special variable --> store data in obj.current --> not re-computed when re-render, only change by re-asign
+	const prevNumberAccounts = useRef(0); // default number-accounts at start is: 0
 	useEffect(() => {
-		// display 'accounts' once
-		// and when register success
-		console.log('---users---');
-		console.log(accounts);
-	}, [accounts]);
+		if (prevNumberAccounts.current !== accounts.length) {
+			if (prevNumberAccounts.current === 0) {
+				console.log('Your first visit, right? Check accounts detail below');
+				console.log(accounts);
+			} else {
+				console.log('---users changed---');
+				console.log(accounts);
+			}
+
+			prevNumberAccounts.current = accounts.length;
+		}
+		// (!) there a thing call "lie to React" --> (i rephrase not sure) the state we use in effect must exist in depency array
+		// (e.g) to console.log(accounts) --> we have to put accounts to dependency --> maybe React know which variable is 'state'
+	}, [accounts]); // great, i can listen to specific property instead whole state
 
 	// (?) i don't know should write 'function' inside or outside component
 	// ---> i want write outside to see it more clean, but 'state' declare inside
@@ -104,7 +117,9 @@ function App() {
 		return (
 			<BrowserRouter>
 				<div className={'nav-bar'}>
-					<img src={logo} alt="Logo of Khung cửi -- a cloth pattern" />
+					<a href="#body" className="nav-bar_logo-wrapper">
+						<img src={logo} alt="Logo of Khung cửi -- a cloth pattern" />
+					</a>
 					<h1 onClick={() => new Audio(mp3).play()}>Khung Cửi</h1>
 
 					{accountLogin?.username ? (

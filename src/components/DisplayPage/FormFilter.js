@@ -4,7 +4,7 @@ import toCapitalizeFirstLetter from './../functions/toCapitalizeFirstLetter';
 const filter_genres = ['Adventure', 'Romance', 'Nature', 'Crime'];
 // (!) need a way to sync between 'genres option isChecked' vs. 'objFilters' -- one source of truth
 
-const FormFilter = ({ accounts,objFitlers, setFilter, accountLogin }) => {
+const FormFilter = ({ accounts, objFilters, setFilter, accountLogin }) => {
 	const filter_friends = accountLogin.friends;
 	const handleChange = (e) => {
 		// 1. back, select the parent groupFilter
@@ -36,9 +36,10 @@ const FormFilter = ({ accounts,objFitlers, setFilter, accountLogin }) => {
 			<div data-type="filter" data-type_filter="since">
 				<InputTextCheckboxField
 					type="number"
-					label={`Since year:`}
+					label={`Since year: `}
 					id="since"
-					value={objFitlers.since}
+					value={objFilters.since}
+					placeholder="..."
 					// browser required this onChange when use 'value' --> it duplicate with onChange of <form> above
 					// --> don't know the order and how those 2 onChange processing
 					handleChange={handleChange} // 'value' to build arrFilter --> (?) do i need 'value' --> i can make id === value
@@ -55,23 +56,26 @@ const FormFilter = ({ accounts,objFitlers, setFilter, accountLogin }) => {
 					/>
 				))}
 			</div>
-			{accountLogin.friends.length >0 ? <div data-type="filter" data-type_filter="friends">
-				{filter_friends.map((frUsername, i) => {
-					const nameOfFriend = accounts.find(acc=>acc.username===frUsername).name
-					return(
-						<InputTextCheckboxField
-							key={i}
-							type="checkbox"
-							label={`🧙‍♀️ ${nameOfFriend}`}
-							id={frUsername.toLowerCase()}
-							value={frUsername} // 'value' to build arrFilter --> (?) do i need 'value' --> i can make id === value
-						/>
-
-
-					)}
-				)}
-			</div> : ''}
-			
+			{accountLogin.friends.length > 0 ? (
+				<div data-type="filter" data-type_filter="friends">
+					{filter_friends.map((frUsername, i) => {
+						const nameOfFriend = accounts.find(
+							(acc) => acc.username === frUsername
+						).name;
+						return (
+							<InputTextCheckboxField
+								key={i}
+								type="checkbox"
+								label={`🧙‍♀️ ${nameOfFriend}`}
+								id={frUsername.toLowerCase()}
+								value={frUsername} // 'value' to build arrFilter --> (?) do i need 'value' --> i can make id === value
+							/>
+						);
+					})}
+				</div>
+			) : (
+				''
+			)}
 		</form>
 	);
 };
