@@ -23,7 +23,7 @@ body.background-dark {
 		padding-top: 140%;
 		content: '';
 	}
-	.filmCardContainer:after {
+	.filmCardContainer::after {
 		display: block;
 		content: '';
 		clear: both;
@@ -37,7 +37,7 @@ body.background-dark {
 		padding-top: 56%;
 		content: '';
 	}
-	.hero:after {
+	.hero::after {
 		display: block;
 		content: '';
 		clear: both;
