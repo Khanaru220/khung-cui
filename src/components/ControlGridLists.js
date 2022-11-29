@@ -1,5 +1,4 @@
 import RowFilms from './RowFilms';
-import toCapitalizeFirstLetter from './functions/toCapitalizeFirstLetter';
 
 const ControlGridLists = ({
 	popFilms,
@@ -52,7 +51,7 @@ const ControlGridLists = ({
 					accounts={accounts}
 					accountLogin={accountLogin}
 					setAccounts={setAccounts}
-					titleList={toCapitalizeFirstLetter(genre)}
+					titleList={genre}
 					arrFilms={genreFilteredFilms[genre]}
 					objFilters={objFilters}
 				/>

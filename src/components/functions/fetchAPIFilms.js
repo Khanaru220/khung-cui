@@ -1,6 +1,5 @@
 import generateNonrepeatNumbers from './generateNonrepeatNumbers';
 import isNumberLike from './isNumberLike';
-import toCapitalizeFirstLetter from './toCapitalizeFirstLetter';
 /**
  *1. handle different endpoints based on arguments
  * 2. recursive requests as needed
@@ -29,7 +28,7 @@ const fetchAPIFilms = async (
 
 			if (genre) {
 				films = films.filter((film) =>
-					film.genres.includes(toCapitalizeFirstLetter(genre))
+					film.genres.some((gen) => gen.toLowerCase() === genre.toLowerCase())
 				);
 			}
 			filmHolder = filmHolder.concat(films);

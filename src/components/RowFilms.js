@@ -51,9 +51,11 @@ const RowFilms = ({
 		// (2) filter 'genres'
 		if (objFilters.genres?.length > 0) {
 			// run loop, with each 'filter' we'll elimnate the non-suitable optiosn ==> final result will has only what meets all 'filter'
-			for (let genre of objFilters.genres) {
+			for (let genreInput of objFilters.genres) {
 				filteredArrFilms = filteredArrFilms.filter((film) => {
-					return film.genres.includes(genre); // @@ it also check capitalize ["Adventure","Romance"]
+					return film.genres.some(
+						(genre) => genre.toLowerCase() === genreInput.toLowerCase()
+					);
 				});
 			}
 		}
@@ -68,7 +70,7 @@ const RowFilms = ({
 				// (1) I think old films occur that
 				// (2) but we want use 'since' to see modern film ==> return false when not have result
 				if (!premieredYear) return false;
-				return premieredYear > objFilters.since; // @@ it also check capitalize ["Adventure","Romance"]
+				return premieredYear > objFilters.since;
 			});
 		}
 	}
