@@ -4,7 +4,7 @@ import generateAcc from './generateAcc';
 // return an 'object' {accounts; checkSignin; checkSignup}
 
 // initialize create Friends
-const initialAccounts = [
+const initialInfo = [
 	{
 		name: 'Vân',
 		username: 'fr-vietnam',
@@ -57,7 +57,7 @@ const initialAccounts = [
 ];
 
 const createInitialAccs = () => {
-	return initialAccounts.map((info) => generateAcc(info));
+	return initialInfo.map((info) => generateAcc(info));
 };
 
 export default createInitialAccs;

@@ -71,7 +71,7 @@ function App() {
 
 			prevNumberAccounts.current = accounts.length;
 		}
-		// (!) there a thing call "lie to React": (i rephrase not sure) the state we use in effect must exist in depency array
+		// (!) there's a thing call "lie to React": (i rephrase not sure) the state we use in effect must exist in depency array
 		// (e.g) to console.log(accounts) -> we have to put accounts to dependency --> maybe React know which variable is 'state'
 	}, [accounts]); // great, i can listen to specific property instead whole state
 	// (?) Should I write 'function' inside or outside component
@@ -107,7 +107,7 @@ function App() {
 	// (TODO) I need add a 'wait point' here, just pass data 'arrFilms' after it is updated
 	// (!) @@ urgly solution, wait 'fecthing data' === separate 2 cases of (Promise/object films)
 
-	// visit website: wait until fetch video to 'initalAccounts' success
+	// visit website: wait until fetch video to initalAccounts success
 	if (accounts.length > 1) {
 		return (
 			<BrowserRouter>
@@ -135,7 +135,7 @@ function App() {
 						<Route
 							path="/"
 							element={
-								// navigate to 'Signup' -- because if user already member, they will use 'remember me' instead
+								// navigate to '/signup' -- because if user already member, they will use 'remember me' instead
 								<Navigate
 									to={`/${accountLogin ? 'cinema' : 'signup'}`}
 								></Navigate>
