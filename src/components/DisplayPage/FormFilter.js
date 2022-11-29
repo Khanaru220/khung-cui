@@ -1,5 +1,5 @@
 import InputTextCheckboxField from '../InputTextCheckboxField.js';
-import getGenres from './../functions/getGenres';
+import getGenres from '../functions/helper/getGenres';
 
 /* (IDEA) show genre-option existing in current films list
 so filter always has value	

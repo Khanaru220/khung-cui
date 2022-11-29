@@ -43,13 +43,13 @@ const Form = ({ doSignup, doLogin, isLoginPage, isSignupPage }) => {
 						// use 'space' instead of 'dash' -- easier for request API search
 						arrPair_ValueLabel={[
 							// change to 'continent' instead 'country'
-							['asia', 'AS'],
-							['africa', 'AF'],
-							['europe', 'EU'],
-							['north ameria', 'NA'],
-							['south ameria', 'SA'],
-							['antarctica', 'AN'],
-							['australia', 'AU'],
+							['asia', 'Asia'],
+							['africa', 'Africa'],
+							['europe', 'Europe'],
+							['north ameria', 'N.America'],
+							['south ameria', 'S.America'],
+							['antarctica', 'Antartica'],
+							['australia', 'Australia'],
 							['universe', 'limit-is-the-sky'],
 						]}
 					/>

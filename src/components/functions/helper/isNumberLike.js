@@ -10,7 +10,8 @@ const isNumberLike = (...elements) => {
 	) {
 		return true;
 	} else {
-		console.error('Not a number', elements);
+		// not neccessary, but at least announce a signal while not having error hanlder
+		console.error('Error validate: Not a number', elements);
 		return false;
 	}
 };

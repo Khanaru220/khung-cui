@@ -7,7 +7,7 @@ import PageDisplayFilms from './components/DisplayPage/PageDisplayFilms';
 import createInitialAccs from './components/functions/createInitialAccs';
 import fetchAPIFilms from './components/functions/fetchAPIFilms';
 import generateAcc from './components/functions/generateAcc';
-import getGenres from './components/functions/getGenres';
+import getGenres from './components/functions/helper/getGenres';
 
 import './App.css';
 import { heroSmallVideos, heroVideos, logo, mp3 } from './components/img/index';
@@ -61,12 +61,9 @@ function App() {
 	useEffect(() => {
 		if (prevNumberAccounts.current !== accounts.length) {
 			if (prevNumberAccounts.current === 0) {
-				console.log(
-					'👋 Your first visit, right? Check accounts detail---',
-					accounts
-				);
+				console.log('👋 Hi there. Check accounts detail---', accounts);
 			} else {
-				console.log('[users] changed---', accounts);
+				console.log('[Users] changed---', accounts);
 			}
 
 			prevNumberAccounts.current = accounts.length;
