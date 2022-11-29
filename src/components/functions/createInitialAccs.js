@@ -33,7 +33,7 @@ const initialAccounts = [
 		name: 'Blöndal',
 		username: 'fr-iceland',
 		password: 'a',
-		country: 'Iceland',
+		country: 'iceland',
 	},
 
 	{

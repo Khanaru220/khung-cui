@@ -1,16 +1,16 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import React, { useEffect, useRef } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-import createInitialAccs from './components/functions/createInitialAccs';
 import FormAccount from './components/AccountPage/FormAccount';
-import generateAcc from './components/functions/generateAcc';
-import PageDisplayFilms from './components/DisplayPage/PageDisplayFilms';
 import FriendAddField from './components/DisplayPage/FriendAddField';
+import PageDisplayFilms from './components/DisplayPage/PageDisplayFilms';
+import createInitialAccs from './components/functions/createInitialAccs';
 import fetchAPIFilms from './components/functions/fetchAPIFilms';
-import fetchAPIFilmsWithGenre from './components/functions/fetchAPIFilmsWithGenre';
+import generateAcc from './components/functions/generateAcc';
+import getGenres from './components/functions/getGenres';
 
 import './App.css';
-import { logo, mp3, heroVideos, heroSmallVideos } from './components/img/index';
+import { heroSmallVideos, heroVideos, logo, mp3 } from './components/img/index';
 
 function App() {
 	const [indexHeroVideo, setIndexHeroVideo] = React.useState(0);
