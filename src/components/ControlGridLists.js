@@ -5,18 +5,17 @@ const ControlGridLists = ({
 	popFilms,
 	genreFilteredFilms,
 	objFilters,
-	accounts, //to find 'arrFriendFilms'
+	accounts, // find 'arrFriendFilms'
 	accountLogin,
 	setAccounts,
 }) => {
-	// ------------------ FRIENDLIST(start) --------
-	// (1) allFriendsList --> save name and display on <FormFilter> as 'option'
-	// (2) checked <option> --> update to 'obj.Filters.friends'
-	// (3) 'obj.Filters.friends' --> pass to this component and process
+	// (1) allFriendsList -> save name and display on <FormFilter> as 'option'
+	// (2) checked <option> -> update to 'obj.Filters.friends'
+	// (3) 'obj.Filters.friends' -> pass to this component and process
 	let arrAllFriendsLists;
 	if (objFilters.friends?.length > 0) {
 		arrAllFriendsLists = objFilters.friends?.map((friend, i) => {
-			// lookup 'friend' --> 'accounts' --> 'acc' --> 'likedFilms'
+			// lookup 'friend' -> 'accounts' -> 'acc' -> 'likedFilms'
 			const accFriend = accounts.find((acc) => acc.username === friend);
 			return (
 				<RowFilms
@@ -31,9 +30,7 @@ const ControlGridLists = ({
 			);
 		});
 	}
-	// ----------------- FRIENDLSIT (end) --------
 
-	// ----------------- MY LSIT (start) --------
 	const myFilmSection = (
 		<RowFilms
 			accounts={accounts}
@@ -46,9 +43,6 @@ const ControlGridLists = ({
 		/>
 	);
 
-	// ----------------- MY LSIT (end) --------
-
-	// ----------------- GENRES LIST (start) --------
 	const generateRowFilmsWithGenre = (genreFilteredFilms) => {
 		const arrRowFilms = [];
 		for (const genre in genreFilteredFilms) {
@@ -67,13 +61,11 @@ const ControlGridLists = ({
 		return arrRowFilms;
 	};
 
-	// ----------------- GENRES LIST (end) --------
-
 	return (
 		<>
-			{/*0. my list on top*/}
+			{/* 0. my list on top */}
 			{myFilmSection}
-			{/*1. default list*/}
+			{/* 1. default list */}
 			<RowFilms
 				accounts={accounts}
 				accountLogin={accountLogin}
@@ -83,10 +75,10 @@ const ControlGridLists = ({
 				objFilters={objFilters}
 			/>
 
-			{/*1.2 genresFilteredFilms list*/}
+			{/* 1.2 genresFilteredFilms list */}
 			{generateRowFilmsWithGenre(genreFilteredFilms)}
 
-			{/*2. conditional list -- Friend's list*/}
+			{/* 2. conditional list -- Friend's list */}
 			{arrAllFriendsLists ? (
 				arrAllFriendsLists
 			) : (

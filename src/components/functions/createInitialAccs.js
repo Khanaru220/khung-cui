@@ -1,10 +1,10 @@
-import generateAcc from '../functions/generateAcc';
+import generateAcc from './generateAcc';
 
 // used to set default state 'accounts' in 'App.js'
 // return an 'object' {accounts; checkSignin; checkSignup}
 
 // initialize create Friends
-const info_5Acc = [
+const initialInfo = [
 	{
 		name: 'Vân',
 		username: 'fr-vietnam',
@@ -35,7 +35,6 @@ const info_5Acc = [
 		password: 'a',
 		country: 'Iceland',
 	},
-	// those 2 below to test "add friend" features
 
 	{
 		name: 'Tui',
@@ -57,8 +56,8 @@ const info_5Acc = [
 	},
 ];
 
-const Initial_5Acc = () => {
-	return info_5Acc.map((info) => generateAcc(info));
+const createInitialAccs = () => {
+	return initialInfo.map((info) => generateAcc(info));
 };
 
-export default Initial_5Acc;
+export default createInitialAccs;

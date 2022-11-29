@@ -9,13 +9,14 @@ const RowFilms = ({
 	accounts,
 	accountLogin,
 }) => {
-	// (!) hard to change property, element deeper level with this 'copy' technique
+	// (!) in deep layers, this 'copy' technique hard to change property/states
+	// (TODO) find a better way to handle element in deep level
 	const copiedAccounts = [...accounts];
 
 	const addFilm = (id) => {
 		// (i suppose it will work base on 'somehow' the 'eventhandler' remember exactly 'arrFilms' when creat)
 		const filmSelected = arrFilms.find((film) => film.id === Number(id));
-		// bad solution -- remove dubplicate friends username
+		// (!) bad solution - remove dubplicate friends username
 		copiedAccounts[copiedAccounts.indexOf(accountLogin)].likedFilms = [
 			...new Set([filmSelected, ...accountLogin.likedFilms]),
 		];
@@ -34,7 +35,7 @@ const RowFilms = ({
 	// size of card-film -- fixed width + height (rectangular)
 	// over-flow: auto -- work better than "scroll"
 
-	// (?) need somehow to keeptrack 'arrFilter' when it change --- will re-run below logic again
+	// (TODO) need somehow to keeptrack 'arrFilter' when it change --- will re-run below logic again
 	// if 'objFilters' 'exist' === toggle ON, assign 'filteredArrFilms'
 	// if (not) bypass this block code and display 'arrFilms' as defauly
 	let filteredArrFilms;
@@ -79,8 +80,7 @@ const RowFilms = ({
 		arrElementFilmSections = [...Array(filmsDisplay.length)].map((_, i) => {
 			/* can't use 'for' here -- it's statement, we need .map to return expression*/
 			/* when see 'array' -- JSX will help us generate multiple*/
-			/*trick transform 'empty Array' --> 'undefediend Array' --- so we can loop over*/
-			/* arrFilms.length === cards generated */
+			/* trick transform 'empty Array' --> 'undefediend Array' --- so we can loop over*/
 
 			// load poster quality based screen width
 			const posterImgURL =

@@ -1,4 +1,4 @@
-import generateRandomRangeNumber from './generateRandomRangeNumber';
+import generateNonrepeatNumbers from './generateNonrepeatNumbers';
 
 class Acc {
 	constructor({ username, password, country, name }) {
@@ -36,7 +36,7 @@ class Acc {
 			// take 3 films (smaller if not enough 3)
 			const quantityFilms =
 				showsHasImage.length >= 2 ? 3 : showsHasImage.length;
-			generateRandomRangeNumber(
+			generateNonrepeatNumbers(
 				quantityFilms,
 				0,
 				showsHasImage.length - 1
@@ -52,7 +52,7 @@ class Acc {
 			const shows = await data.json();
 
 			const quantityFilms = 10;
-			generateRandomRangeNumber(quantityFilms, 0, shows.length - 1).forEach(
+			generateNonrepeatNumbers(quantityFilms, 0, shows.length - 1).forEach(
 				(num) => filmHolder.push(shows[num])
 			);
 
