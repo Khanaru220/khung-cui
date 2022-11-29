@@ -1,33 +1,29 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-
-import './App.css';
-import { logo, mp3, heroVideos, heroSmallVideos } from './components/img/index';
-
-// import ControlGridLists from './components/ControlGridLists';
 import React, { useEffect, useRef } from 'react';
-import FormAccount from './components/AccountPage/FormAccount';
 
-// import Button from './components/Button';
-import Initial_5Acc from './components/initial/Initial_5Acc';
+import createInitialAccs from './components/functions/createInitialAccs';
+import FormAccount from './components/AccountPage/FormAccount';
 import generateAcc from './components/functions/generateAcc';
 import PageDisplayFilms from './components/DisplayPage/PageDisplayFilms';
 import FriendAddField from './components/DisplayPage/FriendAddField';
 import fetchAPIFilms from './components/functions/fetchAPIFilms';
 import fetchAPIFilmsWithGenre from './components/functions/fetchAPIFilmsWithGenre';
 
+import './App.css';
+import { logo, mp3, heroVideos, heroSmallVideos } from './components/img/index';
+
 function App() {
 	const [indexHeroVideo, setIndexHeroVideo] = React.useState(0);
 	const [accountLogin, setAccountLogin] = React.useState(null); // for 'navigate' + 'display my-list, friends'
-	const [accounts, setAccounts] = React.useState(() => Initial_5Acc());
+	const [accounts, setAccounts] = React.useState(() => createInitialAccs());
 	const [genreFilteredFilms, setGenreFilteredFilms] = React.useState({});
 	const [popFilms, setPopFilms] = React.useState([]); // (?) do it need use 'state' here, because i just want store 'films' to local only one, and don't mutate it
-	// (!) temporary solution = i need a way to 'store fetch data' in to 'state'
-	// (?) need research why 'lazy intializer' can solve this problem
+	// (TODO) temporary solution = i need another way to 'store fetch data' in to 'state'
+	// (?) why 'lazy intializer' can solve this problem
 	// (!) 'state' popFilms is unnessary when we're in 'Login page'
 
 	useEffect(() => {
-		// (1,2) fetching after login --> make first visit faster
-
+		// fetching after login --> make first visit faster
 		const fetchGenreFilms = async (...genres) => {
 			const objGenreFilms = {};
 
@@ -58,10 +54,10 @@ function App() {
 		fetchFilms();
 	}, [accountLogin]);
 
-	// display 'accounts' when register success = keep track .length
+	// display 'accounts' when register success = keep track.length
 	// (not run while change other property: likeFilms,...)
 	// useRef(initla value) is a special variable --> store data in obj.current --> not re-computed when re-render, only change by re-asign
-	const prevNumberAccounts = useRef(0); // default number-accounts at start is: 0
+	const prevNumberAccounts = useRef(0);
 	useEffect(() => {
 		if (prevNumberAccounts.current !== accounts.length) {
 			if (prevNumberAccounts.current === 0) {
@@ -75,20 +71,18 @@ function App() {
 
 			prevNumberAccounts.current = accounts.length;
 		}
-		// (!) there a thing call "lie to React" --> (i rephrase not sure) the state we use in effect must exist in depency array
-		// (e.g) to console.log(accounts) --> we have to put accounts to dependency --> maybe React know which variable is 'state'
+		// (!) there a thing call "lie to React": (i rephrase not sure) the state we use in effect must exist in depency array
+		// (e.g) to console.log(accounts) -> we have to put accounts to dependency --> maybe React know which variable is 'state'
 	}, [accounts]); // great, i can listen to specific property instead whole state
-
-	// (?) i don't know should write 'function' inside or outside component
-	// ---> i want write outside to see it more clean, but 'state' declare inside
-	// ---> (?) can I make it look cleaner
+	// (?) Should I write 'function' inside or outside component
+	// -> i want write outside to see it more clean, but 'state' declare inside
+	// -> (?) can I make it look cleaner
 	// those 2 method just pops up in mind --- more clean when pass 'manageAccounts' between component, rather than create new separatae Componets
 	const doSignup = ({ username, password, country }) => {
 		// check if 'username' is unique
 		if (accounts.some((acc) => acc.username === username)) {
 			alert(`🔴 Your USERNAME was taken. Please try another one.`);
 		} else {
-			// create new acc
 			setAccounts([...accounts, generateAcc({ username, password, country })]);
 			alert(`🎉 Congrate! Your account "${username}" is ready to use.`);
 		}
@@ -110,10 +104,10 @@ function App() {
 		}
 	};
 
-	// (?) I need add a 'wait point' here, just pass data 'arrFilms' after it is updated
-	// @@ urgly solution, wait 'fecthing data' === separate 2 cases of (Promise/object films)
+	// (TODO) I need add a 'wait point' here, just pass data 'arrFilms' after it is updated
+	// (!) @@ urgly solution, wait 'fecthing data' === separate 2 cases of (Promise/object films)
 
-	// visit website: wait until fetch video to initalAccounts success
+	// visit website: wait until fetch video to 'initalAccounts' success
 	if (accounts.length > 1) {
 		return (
 			<BrowserRouter>
@@ -134,14 +128,14 @@ function App() {
 
 				<Routes>
 					<>
-						{/* navigate to /cinema if accountLogin exist === login success */}
-						{/* (!) bad repeat-- build a redirect cases bases on 'accountLogin' -- need a better system build a 'net' of relationsihp */}
+						{/* navigate to '/cinema' if accountLogin exist === login success */}
+						{/* (!) bad repeat: build a redirect cases bases on accountLogin -- need a better system build a 'net' of relationsihp */}
 						{/* really powerful <Navigate> i dont need to write another function to navigate or <a href=""></a> */}
-						{/* (?) wait what differences between useNavigate, navigate JS, <<Navigate> componenet  */}
+						{/* (?) what differences between useNavigate, navigate JS, <<Navigate> componenet  */}
 						<Route
 							path="/"
 							element={
-								// navigate to Signup -- because if user already member, they will use 'remember me' instead
+								// navigate to 'Signup' -- because if user already member, they will use 'remember me' instead
 								<Navigate
 									to={`/${accountLogin ? 'cinema' : 'signup'}`}
 								></Navigate>
@@ -162,18 +156,13 @@ function App() {
 											accountLogin={accountLogin}
 										/>
 									</>
-									// <Form
-									// 	doSignup={doSignup}
-									// 	doLogin={doLogin}
-									// 	accountLogin={accountLogin}
-									// />
 								)
 							}
 						/>
 
 						<Route
 							// (1) I need generate this <Route> to be able to navigate to
-							// (2) but I have to duplicate from '/login'
+							// (!) (2)  but I have to duplicate from '/login'
 							path="/signup"
 							element={
 								accountLogin ? (
@@ -271,7 +260,8 @@ function App() {
 		);
 	} else {
 		return (
-			// display while "fetching" --- (upgrade this), find a way to 'add timer'
+			// display when visit login page while "fetching"
+			// (TODO) upgrade: find a way to 'add timer'
 			<p style={{ fontSize: '20px', marginLeft: '50px' }}>
 				We're trying get to you soon.
 				<br />

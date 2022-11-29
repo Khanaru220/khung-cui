@@ -93,8 +93,7 @@ button {
 
 .container-fullScreen {
 	position: relative;
-	height: 100vh; /* (fix) when open dev-box, narrow the height -> we can scroll up to see form */
-	/* width: 100vw; */
+	height: 100vh; /* (FIXED) when open dev-box, narrow the height -> we can scroll up to see form */
 }
 
 .background-dark,
@@ -120,12 +119,11 @@ button {
 }
 
 .filmCardContainer {
-	/* // (?) i don't why need "flex-grow" to trigger flex-basis */
-	/* // minWidth + flex-basic -- remain ratio in small screen, display Maximum: 8 films 1 row */
+	/* (?) why need "flex-grow" to trigger flex-basis */
 
 	flex: 1 0 15%;
-	min-width: 12rem;
-	/* // when has few films not enought 'overflow', and they not too big */
+	min-width: 12rem; /* minWidth + flex-basic -- remain ratio in small screen, display Maximum: 8 films 1 row */
+	/* when has few films not enought 'overflow', and they not too big */
 	max-width: 18%;
 	aspect-ratio: 5/7;
 	position: relative;
@@ -143,11 +141,11 @@ button {
 	border: none;
 	transition: 0.3s all;
 
-	/* // show when first intialize the image */
+	/*  show while loading the image */
 	background-image: url('./components/img/loading-poster.gif');
 
 	background-size: cover;
-	/* // for horizontal image */
+	/*  for horizontal image */
 	background-position: center;
 	overflow: hidden;
 }
@@ -238,7 +236,6 @@ button {
 .formFilter {
 	display: flex;
 	justify-content: flex-end;
-	/* align-items: flex-end; */
 
 	gap: 2rem;
 	font-size: 1.4rem;
@@ -290,7 +287,6 @@ button {
 	display: flex;
 	align-items: center;
 	height: var(--nav-bar-height);
-	/* height:11vh; */
 	min-height: 4rem;
 	width: 100vw;
 	padding: 0 2rem 0 0;
@@ -298,12 +294,6 @@ button {
 	color: #fff;
 	z-index: 999;
 }
-
-/* .nav-bar *:nth-child(1) {
-	margin-left: 5%;
-	height: 90%;
-	transition: all 0.3s;
-} */
 
 .nav-bar_logo-wrapper {
 	height: 90%;
@@ -319,10 +309,6 @@ button {
 .nav-bar_logo-wrapper > img {
 	height: 100%;
 }
-
-/* .background-dark .nav-bar *:nth-child(1) {
-	margin-left: 1%;
-} */
 
 .nav-bar h1 {
 	cursor: pointer;
@@ -350,8 +336,7 @@ button {
 }
 
 .nav-bar > p {
-	/* margin-left:auto; */
-	/* don't know why margin-right of parent doesnt' work */
+	/* (?) why margin-right of parent doesnt' work */
 	margin-left: auto;
 	padding-right: 5%;
 	min-width: 15rem;
@@ -398,7 +383,7 @@ button {
 	justify-content: center;
 
 	width: 100vw;
-	aspect-ratio: 9/5; /* must pre-set wrapper must bigger than video, to prevent "flash change dimension" happen only when we set wrapper size depend on video*/
+	aspect-ratio: 9/5; /* must pre-set wrapper bigger than video, to prevent "flash change dimension" happen only when we set wrapper size depend on video*/
 	max-height: 60vh;
 	overflow: hidden;
 	/* (!) bugs, overflow don't work with top-size (when user ,hero--crop_vertical) */
@@ -439,8 +424,6 @@ button {
 	margin-bottom: 1rem;
 }
 
-/*  */
-
 @media (max-width: 768px) {
 	html {
 		font-size: 50%;
@@ -450,7 +433,7 @@ button {
 		max-height: 70vh;
 	}
 	.hero video {
-		height: 100%; /* to fill the wrapper on small screen */
+		height: 100%; /* fill the wrapper on small screen */
 	}
 	.hero-guide_box {
 		font-size: 1rem;
