@@ -27,16 +27,31 @@ function App() {
 		const fetchGenreFilms = async (...genres) => {
 			const objGenreFilms = {};
 
-			for (const genre of genres) {
-				objGenreFilms[genre] = await fetchAPIFilmsWithGenre(10, genre);
+		const fetchAndUpdateGenreFilms = async () => {
+			const objGenreFilms = {};
+			for (const genre of genres.current) {
+				const genreFilms = await fetchAPIFilms(
+					{
+						satisfiedQuantity: quantityOfGenreFilms,
+						genre,
+					},
+					'genre'
+				);
+				// (TODO) create lazy loading img, so that can remain full resources has been fetched
+				// take less films to reduce loading too much img
+				objGenreFilms[genre] = genreFilms.slice(0, quantityOfGenreFilms);
 			}
-
 			setGenreFilteredFilms(objGenreFilms);
-		};
-
-		const fetchPopFilms = async () => {
-			const popFilms = await fetchAPIFilms(30);
-			setPopFilms(popFilms);
+			/* 			
+			(OlD) request pararelly cause overwhelm uneccessary
+			await Promise.all(
+				genres.current.map(async (genre) => {
+					const genreFilms = await fetchAPIFilms(
+						{satisfiedQuantity: 10,genre},'genre');
+								objGenreFilms[genre] = genreFilms.slice(0, 10);
+							})
+						);
+				*/
 		};
 
 		const fetchFilms = async () => {
