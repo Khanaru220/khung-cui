@@ -16,14 +16,14 @@ const fetchAPIFilms = async (
 	let countReq = 0;
 	const maxReq = 10;
 	// not waste any requests
-	const randPages = generateNonrepeatNumbers(maxReq, 0, maxPage);
+	const nonRepeatPages = generateNonrepeatNumbers(maxReq, 0, maxPage);
 
 	/**
 	 * recursive function for fetching film
 	 */
 	const fetchFragment = async () => {
-		if (filmHolder.length < satisfiedQuantity && countReq < 30) {
-			let url = `https://api.tvmaze.com/shows?page=${randPages[countReq]}`;
+		if (filmHolder.length < satisfiedQuantity && countReq < maxReq) {
+			let url = `https://api.tvmaze.com/shows?page=${nonRepeatPages[countReq]}`;
 			const res = await fetch(url);
 			let films = await res.json();
 
