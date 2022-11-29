@@ -16,6 +16,7 @@ function App() {
 	const [indexHeroVideo, setIndexHeroVideo] = React.useState(0);
 	const [accountLogin, setAccountLogin] = React.useState(null); // for 'navigate' + 'display my-list, friends'
 	const [accounts, setAccounts] = React.useState(() => createInitialAccs());
+	const genres = React.useRef(getGenres(5)); // (NOTE) if specify callback, useRef will carry function, not its return
 	const [genreFilteredFilms, setGenreFilteredFilms] = React.useState({});
 	const [popFilms, setPopFilms] = React.useState([]); // (?) do it need use 'state' here, because i just want store 'films' to local only one, and don't mutate it
 	// (TODO) temporary solution = i need another way to 'store fetch data' in to 'state'
@@ -23,9 +24,15 @@ function App() {
 	// (!) 'state' popFilms is unnessary when we're in 'Login page'
 
 	useEffect(() => {
-		// fetching after login --> make first visit faster
-		const fetchGenreFilms = async (...genres) => {
-			const objGenreFilms = {};
+		const quantityOfPopFilms = 30;
+		const quantityOfGenreFilms = 7;
+		// fetching almost films after login --> make first visit faster
+		const fetchAndUpdatePopFilms = async () => {
+			const popFilms = await fetchAPIFilms({
+				satisfiedQuantity: quantityOfPopFilms,
+			});
+			setPopFilms(popFilms.slice(0, quantityOfPopFilms));
+		};
 
 		const fetchAndUpdateGenreFilms = async () => {
 			const objGenreFilms = {};
@@ -55,15 +62,15 @@ function App() {
 		};
 
 		const fetchFilms = async () => {
-			// (in loginPage) fetch popFilms - user login smooth, have thing to see first
+			// (before loginPage) fetch popFilms - user login smooth, have thing to see first
 			if (!accountLogin) {
-				await fetchPopFilms();
+				await fetchAndUpdatePopFilms();
 				console.log('[Popular films] are ready');
 			} else {
-				// (after login) fetch genresFilms - need times
+				// (login) fetch genresFilms - take time, need multiple requests
 				// (?) better, display 'Loading section' (Just for row, not whole page. Otherwise, it prevent login smooth feeling)
-				await fetchGenreFilms('anime', 'music', 'crime', 'travel'); // (TODO) i don't hanlde the invalid-genre yet
-				console.log('[Genres films] are ready');
+				await fetchAndUpdateGenreFilms();
+				console.log('[Genre films] are ready');
 			}
 		};
 		fetchFilms();
@@ -96,6 +103,7 @@ function App() {
 			alert(`🔴 Your USERNAME was taken. Please try another one.`);
 		} else {
 			setAccounts([...accounts, generateAcc({ username, password, country })]);
+			// (IDEA) try use new html tag for display message
 			alert(`🎉 Congrate! Your account "${username}" is ready to use.`);
 		}
 	};
