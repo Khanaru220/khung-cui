@@ -47,12 +47,12 @@ function App() {
 			// (in loginPage) fetch popFilms - user login smooth, have thing to see first
 			if (!accountLogin) {
 				await fetchPopFilms();
-				console.log('[Popular] films are ready');
+				console.log('[Popular films] are ready');
 			} else {
 				// (after login) fetch genresFilms - need times
-				// (?) better, display 'Loading section' (not whole page, because it prevent login smooth) --> only the Row films not finish fetching
-				await fetchGenreFilms('anime', 'music', 'crime', 'travel'); //(!) i don't hanlde the invalid-genre yet
-				console.log('[Genres] films are ready');
+				// (?) better, display 'Loading section' (Just for row, not whole page. Otherwise, it prevent login smooth feeling)
+				await fetchGenreFilms('anime', 'music', 'crime', 'travel'); // (TODO) i don't hanlde the invalid-genre yet
+				console.log('[Genres films] are ready');
 			}
 		};
 		fetchFilms();
@@ -65,11 +65,12 @@ function App() {
 	useEffect(() => {
 		if (prevNumberAccounts.current !== accounts.length) {
 			if (prevNumberAccounts.current === 0) {
-				console.log('Your first visit, right? Check accounts detail below');
-				console.log(accounts);
+				console.log(
+					'👋 Your first visit, right? Check accounts detail---',
+					accounts
+				);
 			} else {
-				console.log('---users changed---');
-				console.log(accounts);
+				console.log('[users] changed---', accounts);
 			}
 
 			prevNumberAccounts.current = accounts.length;
