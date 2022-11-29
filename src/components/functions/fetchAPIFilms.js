@@ -1,17 +1,49 @@
-const fetchAPIFilms = async (numberFilms = 100) => {
-	// Random:  (0-100 pages)  + (100 first index)
-	//--- do this in local varaible to limit only 1 call API, instead call each time for different 'id'
-	const data = await fetch(
-		`https://api.tvmaze.com/shows?page=${Math.round(Math.random() * 200)}`, // I want it more Random pages for each call, for more category -- (?) does it neccesary
-		{ method: 'GET' }
-	); // (?) don't know what .json() do --> because 'response' doesnt seem like a contain any data
+import generateNonrepeatNumbers from './generateNonrepeatNumbers';
+import isNumberLike from './isNumberLike';
+import toCapitalizeFirstLetter from './toCapitalizeFirstLetter';
+/**
+ *1. handle different endpoints based on arguments
+ * 2. recursive requests as needed
+ * @param {number} satisfiedQuantity - stop request after reach this point
+ */
+const fetchAPIFilms = async (
+	{ satisfiedQuantity, genre } = { satisfiedQuantity: 20 }
+) => {
+	if (!isNumberLike(satisfiedQuantity)) return;
 
-	const films = await data.json();
+	let filmHolder = [];
+	const maxPage = 260;
+	let countReq = 0;
+	const maxReq = 10;
+	// not waste any requests
+	const randPages = generateNonrepeatNumbers(maxReq, 0, maxPage);
 
-	// if 'films from API' smaller than our 'argu' ==> just take enough films fro API
-	numberFilms = films.length < numberFilms ? films.length : numberFilms;
+	/**
+	 * recursive function for fetching film
+	 */
+	const fetchFragment = async () => {
+		if (filmHolder.length < satisfiedQuantity && countReq < 30) {
+			let url = `https://api.tvmaze.com/shows?page=${randPages[countReq]}`;
+			const res = await fetch(url);
+			let films = await res.json();
 
-	return films.slice(0, numberFilms); // temporary solution -- .slice(shalow copy)
+			if (genre) {
+				films = films.filter((film) =>
+					film.genres.includes(toCapitalizeFirstLetter(genre))
+				);
+			}
+			filmHolder = filmHolder.concat(films);
+
+			countReq++;
+			// return another Promise to not let settle. Continue call
+			return fetchFragment();
+		}
+	};
+
+	await fetchFragment();
+	/* (TODO) handle `https://api.tvmaze.com/search/shows?q=${country}`
+  maybe conflict with 'genere'
+  */
+	return filmHolder;
 };
-
 export default fetchAPIFilms;
