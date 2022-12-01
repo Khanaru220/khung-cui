@@ -1,17 +1,22 @@
 import generateNonrepeatNumbers from './helper/generateNonrepeatNumbers';
 import isNumberLike from './helper/isNumberLike';
 /**
- *1. handle different endpoints based on arguments
- * 2. recursive requests as needed
+ * @description handle different endpoints based on arguments + recursive requests as needed
  * @param {number} satisfiedQuantity - stop request after reach this point
  * @param {string} genre - decide url, data to fetch relevant ['undefine', genre, country]
  */
 const fetchAPIFilms = async (
-	{ satisfiedQuantity, genre, country } = { satisfiedQuantity: 10 },
+	{ satisfiedQuantity = 10, genre, country } = {},
 	option
 ) => {
 	// (!) temporary: idea of 'option' is to prevent conflict when both 'genre' + 'country'
-	if (!isNumberLike(satisfiedQuantity)) return;
+	if (!isNumberLike(satisfiedQuantity)) {
+		// (?) is throw Error better? i suppose it crash app, stop user interaction
+		console.error(
+			`Error validate: 'satisfiedQuantity' is not a number-like | default: don't fetch`
+		);
+		return;
+	}
 
 	let filmHolder = [];
 	const maxPage = 260;
@@ -31,7 +36,7 @@ const fetchAPIFilms = async (
 				// (TODO) handle case repeat request (not reach satisfiedQuantity) with same url -> duplicate data
 				url = `https://api.tvmaze.com/search/shows?q=${country}`;
 			} else {
-				console.error(`Error validate: check 'country' input/option again`);
+				console.error(`Error validate: 'country' property is required`);
 			}
 		}
 
@@ -41,21 +46,20 @@ const fetchAPIFilms = async (
 
 			// (!) need a solution to separate this multi-option + able to trigger recursive
 			if (option === 'genre') {
-				console.log('url-in-genre', url);
 				if (genre) {
 					// (TODO) validate more cases about 'genre' string
 					films = films.filter((film) =>
 						film.genres.some((gen) => gen.toLowerCase() === genre.toLowerCase())
 					);
 				} else {
-					console.error(`Error validate: check 'genre' input/option again`);
+					console.error(`Error validate: 'genre' property is required`);
 				}
 			} else if (option === 'country') {
-				console.log('url-in-country', url);
 				if (country) {
 					films = films.map((el) => el.show);
 				} else {
 					// (!) duplicate from the top: to remind add when update later
+					console.error(`Error validate: 'country' is required`);
 				}
 			}
 

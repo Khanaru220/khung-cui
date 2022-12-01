@@ -34,6 +34,10 @@ const getGenres = (numberOfGenres) => {
 		genres = generateNonrepeatNumbers(numberOfGenres, 0, genres.length - 1).map(
 			(i) => genres[i]
 		);
+	} else {
+		console.warn(
+			`Error validate: 'numberOfGenres' is not a number-like | default: get all genres`
+		);
 	}
 	return genres;
 };
