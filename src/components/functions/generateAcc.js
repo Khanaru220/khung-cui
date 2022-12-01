@@ -36,7 +36,7 @@ class Acc {
 			});
 		};
 
-		fetchAndUpdateLikedFilms();
+		fetchAndUpdateLikedFilms(); //(?) beside order of execution. Any benefit when execute with await? (when order don't matter)
 		this.country = country;
 	}
 }
