@@ -1,7 +1,10 @@
 import InputTextCheckboxField from '../InputTextCheckboxField.js';
-import toCapitalizeFirstLetter from './../functions/toCapitalizeFirstLetter';
+import getGenres from '../functions/helper/getGenres';
 
-const filter_genres = ['Adventure', 'Romance', 'Nature', 'Crime'];
+/* (IDEA) show genre-option existing in current films list
+so filter always has value	
+*/
+const filter_genres = getGenres(5);
 // (!) need a way to sync between 'genres option isChecked' vs. 'objFilters' -- one source of truth
 
 const FormFilter = ({ accounts, objFilters, setFilter, accountLogin }) => {
@@ -12,7 +15,7 @@ const FormFilter = ({ accounts, objFilters, setFilter, accountLogin }) => {
 		let value;
 		// 2.  select all the ':checked' input
 		if (e.target.getAttribute('type') === 'checkbox') {
-			// bad solution, used to separate 'since-text' vs. 'checkbox group'
+			// (!) bad solution, used to separate 'since-text' vs. 'checkbox group'
 			// .querySelectorAll return 'node' --> conver to array to use 'map'
 			value = [...groupFilterEl.querySelectorAll(':checked')].map(
 				(node) => node.value
@@ -50,9 +53,9 @@ const FormFilter = ({ accounts, objFilters, setFilter, accountLogin }) => {
 					<InputTextCheckboxField
 						key={i}
 						type="checkbox"
-						label={toCapitalizeFirstLetter(option)}
+						label={option}
 						id={option.toLowerCase()}
-						value={toCapitalizeFirstLetter(option)} // 'value' to build arrFilter --> (?) do i need 'value' --> i can make id === value
+						value={option}
 					/>
 				))}
 			</div>

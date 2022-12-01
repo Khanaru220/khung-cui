@@ -20,7 +20,7 @@ const PageDisplayFilms = ({
 	});
 
 	useEffect(() => {
-		console.log('filters---', objFilters);
+		console.log('[Filters] changed', objFilters);
 	}, [objFilters]);
 
 	const setFilter = (typeFilter, arrValues) => {

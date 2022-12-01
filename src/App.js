@@ -1,21 +1,22 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import React, { useEffect, useRef } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-import createInitialAccs from './components/functions/createInitialAccs';
 import FormAccount from './components/AccountPage/FormAccount';
-import generateAcc from './components/functions/generateAcc';
-import PageDisplayFilms from './components/DisplayPage/PageDisplayFilms';
 import FriendAddField from './components/DisplayPage/FriendAddField';
+import PageDisplayFilms from './components/DisplayPage/PageDisplayFilms';
+import createInitialAccs from './components/functions/createInitialAccs';
 import fetchAPIFilms from './components/functions/fetchAPIFilms';
-import fetchAPIFilmsWithGenre from './components/functions/fetchAPIFilmsWithGenre';
+import generateAcc from './components/functions/generateAcc';
+import getGenres from './components/functions/helper/getGenres';
 
 import './App.css';
-import { logo, mp3, heroVideos, heroSmallVideos } from './components/img/index';
+import { heroSmallVideos, heroVideos, logo, mp3 } from './components/img/index';
 
 function App() {
 	const [indexHeroVideo, setIndexHeroVideo] = React.useState(0);
 	const [accountLogin, setAccountLogin] = React.useState(null); // for 'navigate' + 'display my-list, friends'
 	const [accounts, setAccounts] = React.useState(() => createInitialAccs());
+	const genres = React.useRef(getGenres(7)); // (NOTE) if specify callback, useRef will carry function, not its return
 	const [genreFilteredFilms, setGenreFilteredFilms] = React.useState({});
 	const [popFilms, setPopFilms] = React.useState([]); // (?) do it need use 'state' here, because i just want store 'films' to local only one, and don't mutate it
 	// (TODO) temporary solution = i need another way to 'store fetch data' in to 'state'
@@ -23,32 +24,53 @@ function App() {
 	// (!) 'state' popFilms is unnessary when we're in 'Login page'
 
 	useEffect(() => {
-		// fetching after login --> make first visit faster
-		const fetchGenreFilms = async (...genres) => {
-			const objGenreFilms = {};
-
-			for (const genre of genres) {
-				objGenreFilms[genre] = await fetchAPIFilmsWithGenre(10, genre);
-			}
-
-			setGenreFilteredFilms(objGenreFilms);
+		const quantityOfPopFilms = 30;
+		const quantityOfGenreFilms = 8;
+		// fetching almost films after login --> make first visit faster
+		const fetchAndUpdatePopFilms = async () => {
+			const popFilms = await fetchAPIFilms({
+				satisfiedQuantity: quantityOfPopFilms,
+			});
+			setPopFilms(popFilms.slice(0, quantityOfPopFilms));
 		};
 
-		const fetchPopFilms = async () => {
-			const popFilms = await fetchAPIFilms(30);
-			setPopFilms(popFilms);
+		const fetchAndUpdateGenreFilms = async () => {
+			const objGenreFilms = {};
+			for (const genre of genres.current) {
+				const genreFilms = await fetchAPIFilms(
+					{
+						satisfiedQuantity: quantityOfGenreFilms,
+						genre,
+					},
+					'genre'
+				);
+				// (TODO) create lazy loading img, so that can remain full resources has been fetched
+				// take less films to reduce loading too much img
+				objGenreFilms[genre] = genreFilms.slice(0, quantityOfGenreFilms);
+			}
+			setGenreFilteredFilms(objGenreFilms);
+			/* 			
+			(OLD WAY) request pararelly cause overwhelm uneccessary
+			await Promise.all(
+				genres.current.map(async (genre) => {
+					const genreFilms = await fetchAPIFilms(
+						{satisfiedQuantity: 10,genre},'genre');
+								objGenreFilms[genre] = genreFilms.slice(0, 10);
+							})
+						);
+				*/
 		};
 
 		const fetchFilms = async () => {
-			// (in loginPage) fetch popFilms - user login smooth, have thing to see first
+			// (before loginPage) fetch popFilms - user login smooth, have thing to see first
 			if (!accountLogin) {
-				await fetchPopFilms();
+				await fetchAndUpdatePopFilms();
 				console.log('[Popular films] are ready');
 			} else {
-				// (after login) fetch genresFilms - need times
+				// (login) fetch genresFilms - take time, need multiple requests
 				// (?) better, display 'Loading section' (Just for row, not whole page. Otherwise, it prevent login smooth feeling)
-				await fetchGenreFilms('anime', 'music', 'crime', 'travel'); // (TODO) i don't hanlde the invalid-genre yet
-				console.log('[Genres films] are ready');
+				await fetchAndUpdateGenreFilms();
+				console.log('[Genre films] are ready');
 			}
 		};
 		fetchFilms();
@@ -61,12 +83,9 @@ function App() {
 	useEffect(() => {
 		if (prevNumberAccounts.current !== accounts.length) {
 			if (prevNumberAccounts.current === 0) {
-				console.log(
-					'👋 Your first visit, right? Check accounts detail---',
-					accounts
-				);
+				console.log('👋 Hi there. Check accounts detail---', accounts);
 			} else {
-				console.log('[users] changed---', accounts);
+				console.log('[Users] changed---', accounts);
 			}
 
 			prevNumberAccounts.current = accounts.length;
@@ -84,6 +103,7 @@ function App() {
 			alert(`🔴 Your USERNAME was taken. Please try another one.`);
 		} else {
 			setAccounts([...accounts, generateAcc({ username, password, country })]);
+			// (IDEA) try use new html tag <dialog> for display message
 			alert(`🎉 Congrate! Your account "${username}" is ready to use.`);
 		}
 	};

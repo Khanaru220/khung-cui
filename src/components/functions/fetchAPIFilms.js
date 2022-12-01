@@ -1,17 +1,76 @@
-const fetchAPIFilms = async (numberFilms = 100) => {
-	// Random:  (0-100 pages)  + (100 first index)
-	//--- do this in local varaible to limit only 1 call API, instead call each time for different 'id'
-	const data = await fetch(
-		`https://api.tvmaze.com/shows?page=${Math.round(Math.random() * 200)}`, // I want it more Random pages for each call, for more category -- (?) does it neccesary
-		{ method: 'GET' }
-	); // (?) don't know what .json() do --> because 'response' doesnt seem like a contain any data
+import generateNonrepeatNumbers from './helper/generateNonrepeatNumbers';
+import isNumberLike from './helper/isNumberLike';
+/**
+ * @description handle different endpoints based on arguments + recursive requests as needed
+ * @param {number} satisfiedQuantity - stop request after reach this point
+ * @param {string} genre - decide url, data to fetch relevant ['undefine', genre, country]
+ */
+const fetchAPIFilms = async (
+	{ satisfiedQuantity = 10, genre, country } = {},
+	option
+) => {
+	// (!) temporary: idea of 'option' is to prevent conflict when both 'genre' + 'country'
+	if (!isNumberLike(satisfiedQuantity)) {
+		// (?) is throw Error better? i suppose it crash app, stop user interaction
+		console.error(
+			`Error validate: 'satisfiedQuantity' is not a number-like | default: don't fetch`
+		);
+		return;
+	}
 
-	const films = await data.json();
+	let filmHolder = [];
+	const maxPage = 260;
+	let countReq = 0;
+	const maxReq = 10;
+	// not waste any requests
+	const nonRepeatPages = generateNonrepeatNumbers(maxReq, 0, maxPage);
 
-	// if 'films from API' smaller than our 'argu' ==> just take enough films fro API
-	numberFilms = films.length < numberFilms ? films.length : numberFilms;
+	/**
+	 * recursive function for fetching film
+	 */
+	const fetchAndUpdateFilmHolderFragment = async () => {
+		// put url here for update each recursive
+		let url = `https://api.tvmaze.com/shows?page=${nonRepeatPages[countReq]}`;
+		if (option === 'country') {
+			if (country) {
+				// (TODO) handle case repeat request (not reach satisfiedQuantity) with same url -> duplicate data
+				url = `https://api.tvmaze.com/search/shows?q=${country}`;
+			} else {
+				console.error(`Error validate: 'country' property is required`);
+			}
+		}
 
-	return films.slice(0, numberFilms); // temporary solution -- .slice(shalow copy)
+		if (filmHolder.length < satisfiedQuantity && countReq < maxReq) {
+			const res = await fetch(url);
+			let films = await res.json();
+
+			// (!) need a solution to separate this multi-option + able to trigger recursive
+			if (option === 'genre') {
+				if (genre) {
+					// (TODO) validate more cases about 'genre' string
+					films = films.filter((film) =>
+						film.genres.some((gen) => gen.toLowerCase() === genre.toLowerCase())
+					);
+				} else {
+					console.error(`Error validate: 'genre' property is required`);
+				}
+			} else if (option === 'country') {
+				if (country) {
+					films = films.map((el) => el.show);
+				} else {
+					// (!) duplicate from the top: to remind add when update later
+					console.error(`Error validate: 'country' is required`);
+				}
+			}
+
+			filmHolder = filmHolder.concat(films);
+
+			countReq++;
+			// return another Promise to not let settle. Continue call
+			return fetchAndUpdateFilmHolderFragment();
+		}
+	};
+	await fetchAndUpdateFilmHolderFragment();
+	return filmHolder;
 };
-
 export default fetchAPIFilms;

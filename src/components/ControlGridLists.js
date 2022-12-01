@@ -1,5 +1,4 @@
 import RowFilms from './RowFilms';
-import toCapitalizeFirstLetter from './functions/toCapitalizeFirstLetter';
 
 const ControlGridLists = ({
 	popFilms,
@@ -23,7 +22,7 @@ const ControlGridLists = ({
 					accountLogin={accountLogin}
 					setAccounts={setAccounts}
 					key={i}
-					titleList={`😊 ${accFriend.name}'s list`}
+					titleOfList={`😊 ${accFriend.name}'s watching`}
 					arrFilms={accFriend.likedFilms}
 					objFilters={objFilters}
 				/>
@@ -37,7 +36,7 @@ const ControlGridLists = ({
 			accountLogin={accountLogin}
 			setAccounts={setAccounts}
 			isMyList={true}
-			titleList="💜 Your favourites"
+			titleOfList="💜 Your favourites"
 			arrFilms={accountLogin.likedFilms}
 			objFilters={objFilters}
 		/>
@@ -52,7 +51,7 @@ const ControlGridLists = ({
 					accounts={accounts}
 					accountLogin={accountLogin}
 					setAccounts={setAccounts}
-					titleList={toCapitalizeFirstLetter(genre)}
+					titleOfList={genre}
 					arrFilms={genreFilteredFilms[genre]}
 					objFilters={objFilters}
 				/>
@@ -70,7 +69,7 @@ const ControlGridLists = ({
 				accounts={accounts}
 				accountLogin={accountLogin}
 				setAccounts={setAccounts}
-				titleList="Popular"
+				titleOfList="🌠 Popular"
 				arrFilms={popFilms}
 				objFilters={objFilters}
 			/>
