@@ -16,7 +16,7 @@ function App() {
 	const [indexHeroVideo, setIndexHeroVideo] = React.useState(0);
 	const [accountLogin, setAccountLogin] = React.useState(null); // for 'navigate' + 'display my-list, friends'
 	const [accounts, setAccounts] = React.useState(() => createInitialAccs());
-	const genres = React.useRef(getGenres(5)); // (NOTE) if specify callback, useRef will carry function, not its return
+	const genres = React.useRef(getGenres(7)); // (NOTE) if specify callback, useRef will carry function, not its return
 	const [genreFilteredFilms, setGenreFilteredFilms] = React.useState({});
 	const [popFilms, setPopFilms] = React.useState([]); // (?) do it need use 'state' here, because i just want store 'films' to local only one, and don't mutate it
 	// (TODO) temporary solution = i need another way to 'store fetch data' in to 'state'
@@ -25,7 +25,7 @@ function App() {
 
 	useEffect(() => {
 		const quantityOfPopFilms = 30;
-		const quantityOfGenreFilms = 7;
+		const quantityOfGenreFilms = 8;
 		// fetching almost films after login --> make first visit faster
 		const fetchAndUpdatePopFilms = async () => {
 			const popFilms = await fetchAPIFilms({
@@ -50,7 +50,7 @@ function App() {
 			}
 			setGenreFilteredFilms(objGenreFilms);
 			/* 			
-			(OlD) request pararelly cause overwhelm uneccessary
+			(OLD WAY) request pararelly cause overwhelm uneccessary
 			await Promise.all(
 				genres.current.map(async (genre) => {
 					const genreFilms = await fetchAPIFilms(
@@ -103,7 +103,7 @@ function App() {
 			alert(`🔴 Your USERNAME was taken. Please try another one.`);
 		} else {
 			setAccounts([...accounts, generateAcc({ username, password, country })]);
-			// (IDEA) try use new html tag for display message
+			// (IDEA) try use new html tag <dialog> for display message
 			alert(`🎉 Congrate! Your account "${username}" is ready to use.`);
 		}
 	};

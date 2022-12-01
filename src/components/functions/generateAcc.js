@@ -15,7 +15,6 @@ class Acc {
 	// setter
 	set _country(country) {
 		// trigger, when user add 'country'
-		let filmHolder = [];
 
 		// ensure, setter wait until fetching finish
 		// (?) is there a way make 'setter' become async -> A: need trick
@@ -28,8 +27,7 @@ class Acc {
 			]);
 			// (TODO) create module for hasOnlyImage shows
 
-			[quantityOfCountryFilms, quantityOfBufferFilms].forEach((value, i) => {
-				const quantity = value;
+			[quantityOfCountryFilms, quantityOfBufferFilms].forEach((quantity, i) => {
 				const films = i === 0 ? countryFilms : bufferFilms;
 				// pick film random then add to likedFilms
 				generateNonrepeatNumbers(quantity, 0, films.length - 1).forEach(

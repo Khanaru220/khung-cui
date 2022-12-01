@@ -46,9 +46,9 @@ const Form = ({ doSignup, doLogin, isLoginPage, isSignupPage }) => {
 							['asia', 'Asia'],
 							['africa', 'Africa'],
 							['europe', 'Europe'],
-							['north ameria', 'N.America'],
-							['south ameria', 'S.America'],
-							['antarctica', 'Antartica'],
+							['north america', 'N.America'],
+							['south america', 'S.America'],
+							['antarctica', 'Antarctica'],
 							['australia', 'Australia'],
 							['universe', 'limit-is-the-sky'],
 						]}

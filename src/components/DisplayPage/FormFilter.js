@@ -55,7 +55,7 @@ const FormFilter = ({ accounts, objFilters, setFilter, accountLogin }) => {
 						type="checkbox"
 						label={option}
 						id={option.toLowerCase()}
-						value={option} // 'value' to build arrFilter --> (?) do i need 'value' --> i can make id === value
+						value={option}
 					/>
 				))}
 			</div>
