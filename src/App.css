@@ -101,7 +101,7 @@ button {
 .nav-bar {
 	transition: 1.5s all;
 }
-.background-dark #root > :not(.hero):not(.nav-bar) {
+.background-dark #root > .show-section {
 	padding: 3rem 5% 0 5%;
 	transition: 1.5s all;
 }
@@ -367,7 +367,9 @@ button {
 	position: absolute;
 	bottom: 3rem;
 	right: -5.2rem;
-	content: 'fr-vietnam (japan africa spain us netherland denamrk iceland)';
+	/* https://stackoverflow.com/a/17047836/14733188 */
+	content: 'fr-vi\A (ja | es | za | is | dk | us)	';
+	white-space: pre;
 	padding: 0.5rem;
 	background-color: white;
 	color: black;

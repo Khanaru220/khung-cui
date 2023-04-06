@@ -7,31 +7,31 @@ import generateAcc from './generateAcc';
 const initialInfo = [
 	{
 		name: 'Vân',
-		username: 'fr-vietnam',
+		username: 'fr-vi',
 		password: 'a',
 		country: 'vietnam',
 	},
 	{
 		name: 'Yukiko',
-		username: 'fr-japan',
+		username: 'fr-ja',
 		password: 'a',
 		country: 'japan',
 	},
 	{
 		name: 'Ibañez',
-		username: 'fr-spain',
+		username: 'fr-es',
 		password: 'a',
 		country: 'spain',
 	},
 	{
 		name: 'Osman',
-		username: 'fr-africa',
+		username: 'fr-za',
 		password: 'a',
 		country: 'africa',
 	},
 	{
 		name: 'Blöndal',
-		username: 'fr-iceland',
+		username: 'fr-is',
 		password: 'a',
 		country: 'iceland',
 	},
@@ -44,7 +44,7 @@ const initialInfo = [
 	},
 	{
 		name: 'Denmark',
-		username: 'fr-denmark',
+		username: 'fr-dk',
 		password: 'a',
 		country: 'denmark',
 	},

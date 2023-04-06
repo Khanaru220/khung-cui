@@ -251,7 +251,7 @@ function App() {
 										{/* 'media' fro response video-src attribute no longer support */}
 										{/* hack to enable dark-background */}
 										{document.body.classList.add('background-dark')}
-										<div>
+										<div className="show-section">
 											<button onClick={() => setAccountLogin(null)}>
 												Sign out
 											</button>
