@@ -11,7 +11,7 @@ function GuideBox() {
 					rel="noreferrer"
 					className={styles.buttonGuideClip}
 				>
-					GUIDE CLIP
+					DEMO CLIP
 				</a>
 				{/* CSS module will create a new unique classname
 				to add multiple: treat them as normal string, separate by 'space' */}
